@@ -1,0 +1,33 @@
+import { Router } from 'express'
+import { red, green, blue } from './../../helpers/chalk.helper'
+const router = new Router()
+
+export function {{camelCase name}}Controller() {
+  // ======
+  // Routes
+  // ======
+  router.get('/', index)
+  
+  // ======
+  // Method
+  // ======
+  async function index(req, res) {
+    try {
+      blue('{{camelCase name}}s > controller > index')
+     
+      const result = 'result'
+      green(result)
+      res.send(result)
+      return
+    } catch (error) {
+      red(error)
+      res.status(500).send(error)
+      return
+    }
+  }
+
+  
+  return router
+}
+
+export const {{camelCase name}} = router.use('/{{camelCase name}}', {{camelCase name}}Controller())

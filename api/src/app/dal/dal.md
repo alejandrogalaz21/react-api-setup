@@ -1,1 +1,0 @@
-[DAL](https://github.com/goldbergyoni/nodebestpractices/blob/master/assets/images/keepexpressinweb.gif)

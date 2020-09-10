@@ -1,32 +1,22 @@
 {
-  "name": "emeritus",
+  "name": "express-api",
   "version": "1.0.0",
-  "engines": {
-    "node": ">=8.0.0"
-  },
-  "description": "node server using babel",
-  "main": "/src/server.js",
+  "description": "simple express api demo",
+  "main": "index.js",
   "scripts": {
-    "start": "nodemon src/server.js --exec babel-node && eslint",
-    "build": "babel src -d dist --source-maps",
-    "serve": "node dist/server.js",
+    "start": "env ENV=development nodemon index.js --exec babel-node",
+    "build": "env ENV=production babel src -d dist",
+    "serve": "node dist/index.js",
     "test": "mocha --require @babel/register",
-    "eslint": "./node_modules/.bin/eslint .eslintr.json"
-  },
-  "jest": {
-    "testMatch": [
-      "<rootDir>/**/**"
-    ]
+    "plop": "plop"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/alejandrogalaz21/node-babel-server-.git"
+    "url": "git+https://github.com/alejandrogalaz21/express-api.git"
   },
   "keywords": [
     "node",
-    "node.js",
-    "babel",
-    "node-babel",
+    "express",
     "javascript",
     "js"
   ],
@@ -36,53 +26,28 @@
     "@babel/cli": "^7.2.3",
     "@babel/core": "^7.6.4",
     "@babel/node": "^7.6.3",
+    "@babel/polyfill": "^7.11.5",
     "@babel/preset-env": "^7.4.2",
     "@babel/register": "^7.4.0",
-    "eslint": "^6.6.0",
-    "eslint-plugin-babel": "^5.3.0",
-    "eslint-plugin-node": "^10.0.0",
-    "eslint-plugin-security": "^1.4.0",
+    "babel-node": "^0.0.1-security",
     "mocha": "^5.2.0",
-    "node-color-log": "^2.2.0",
     "nodemon": "^1.17.5"
   },
   "bugs": {
-    "url": "https://github.com/alejandrogalaz21/node-babel-server-/issues"
+    "url": "https://github.com/alejandrogalaz21/express-api/issues"
   },
-  "homepage": "https://github.com/alejandrogalaz21/node-babel-server-#readme",
+  "homepage": "https://github.com/alejandrogalaz21/express-api#readme",
   "dependencies": {
-    "@babel/polyfill": "^7.6.0",
-    "app-root-path": "^3.0.0",
-    "axios": "^0.19.0",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.19.0",
-    "chalk": "^2.4.2",
-    "compression": "^1.7.4",
-    "crypto-js": "^4.0.0",
-    "dotenv": "^8.2.0",
-    "email-templates": "^7.0.4",
+    "chalk": "^4.1.0",
     "express": "^4.17.1",
-    "express-fileupload": "^1.1.6-alpha.6",
-    "express-graphql": "^0.9.0",
-    "geoip-lite": "^1.3.8",
-    "graphql": "^14.5.8",
-    "handlebars": "^4.7.6",
-    "helmet": "^3.21.2",
-    "jsonwebtoken": "^8.5.1",
-    "jsreport": "^2.8.0",
-    "jsreport-core": "^2.8.1",
-    "jsreport-express": "^2.6.0",
-    "jsreport-templates": "^2.3.3",
-    "moment": "^2.24.0",
-    "mongoose": "^5.7.7",
-    "mongoose-morgan": "^1.0.12",
-    "morgan": "^1.9.1",
-    "nodemailer": "^6.4.6",
+    "express-fileupload": "^1.2.0",
+    "helmet": "^4.1.0",
+    "mongoose": "^5.10.4",
+    "morgan": "^1.10.0",
     "passport": "^0.4.1",
     "passport-jwt": "^4.0.0",
-    "pug": "^2.0.4",
-    "request-ip": "^2.1.3",
-    "socket.io": "^2.3.0",
-    "uuid": "^3.3.3"
+    "plop": "^2.7.4"
   }
 }
