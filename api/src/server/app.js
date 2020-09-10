@@ -27,11 +27,9 @@ app.set('json spaces', 2)
 app.use(middleware)
 // cors middleware
 app.use(cors)
-// main router of the app
-app.use(router)
+// api routes
+router.use('/api', apiRoutes)
 
-app.get('/*', (req, res, next) =>
-  res.sendFile(path.join(config.publicPath, 'index.html'))
-)
+app.get('/*', (req, res, next) => res.sendFile(path.join(config.publicPath, 'index.html')))
 
 export { app, reportingApp }

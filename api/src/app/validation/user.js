@@ -1,4 +1,4 @@
-import { isEmpty } from './../../util'
+import { isEmpty } from '../../util'
 
 /**
  * @export
@@ -8,7 +8,7 @@ import { isEmpty } from './../../util'
  * @desc validate the incomming request
  */
 export function saveValidation(User) {
-  return async function({ name, lastName, email, institutions, role }, uuid) {
+  return async function ({ name, lastName, email, institutions, role }, uuid) {
     const errors = {}
     // Request validations required
     if (!name) errors.name = 'El nombre es requerido'
