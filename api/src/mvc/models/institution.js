@@ -1,0 +1,34 @@
+import mongoose from 'mongoose'
+import uuidv4 from 'uuid/v4'
+
+const Schema = mongoose.Schema
+const ObjectId = mongoose.Schema.ObjectId
+const schemaConfig = { timestamps: true }
+const schema = new Schema(
+  {
+    uuid: { type: String, default: uuidv4, required: true },
+    name: { type: String, required: true, trim: true },
+    description: { type: String, required: true, trim: true },
+    code: { type: String, required: true, immutable: true, index: true, unique: true },
+    address: {
+      address: { type: String, required: true, trim: true },
+      lat: { type: Number },
+      lng: { type: Number }
+    },
+    detail: [
+      {
+        cause: String,
+        description: String,
+        active: { type: Boolean, default: true },
+        createdAt: { type: Date, default: Date.now },
+        created_by: { type: ObjectId, ref: 'user', default: null }
+      }
+    ],
+    active: { type: Boolean, default: true },
+    created_by: { type: ObjectId, ref: 'user', default: null },
+    updated_by: { type: ObjectId, ref: 'user', default: null }
+  },
+  schemaConfig
+)
+
+export default mongoose.model('institution', schema)

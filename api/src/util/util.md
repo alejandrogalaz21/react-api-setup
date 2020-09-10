@@ -1,0 +1,2 @@
+## Util
+The last type of logic we’ll cover is that of common logic functions that are not necessarily specific to your business logic or domain, or even a REST API in general. A good example of a utility function would be a function that converts milliseconds to minutes and/or seconds, or one that checks two arrays to see if they contain similar items. These are general enough – and reusable enough – that they deserve to go in their own folder.
