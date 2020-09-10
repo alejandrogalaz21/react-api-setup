@@ -2,7 +2,11 @@ import React from 'react'
 import { connect } from 'react-redux'
 
 export const Dashboard = () => {
-  return <div></div>
+  return (
+    <div>
+      <h1>Dashboard</h1>
+    </div>
+  )
 }
 
 const mapStateToProps = state => ({})

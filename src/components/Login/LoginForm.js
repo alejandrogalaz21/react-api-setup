@@ -1,7 +1,10 @@
 import React, { useState } from 'react'
 import { connect } from 'react-redux'
+import { useHistory } from 'react-router-dom'
 
 export const LoginForm = () => {
+  const history = useHistory()
+
   const [form, setForm] = useState({
     email: '',
     password: '',
@@ -19,7 +22,9 @@ export const LoginForm = () => {
 
   function handleOnSubmit(event) {
     event.preventDefault()
+    history.push('/dashboard')
   }
+
   return (
     <form onSubmit={handleOnSubmit} className='user'>
       <div className='form-group'>
@@ -60,9 +65,7 @@ export const LoginForm = () => {
           </label>
         </div>
       </div>
-      <a href='index.html' className='btn btn-primary btn-user btn-block'>
-        Login
-      </a>
+      <button className='btn btn-primary btn-user btn-block'>Login</button>
       <hr />
       <a href='index.html' className='btn btn-google btn-user btn-block'>
         <i className='fab fa-google fa-fw' /> Login with Google
