@@ -1,0 +1,53 @@
+version: '3'
+
+services:
+  mongo:
+    container_name: mongodb-dev
+    image: mongo:4.2
+    ports:
+      - 27017:27017
+    expose:
+      - '27017'
+    restart: unless-stopped
+    volumes:
+      - ./mongo-volume:/data/db
+
+  api:
+    depends_on:
+      - mongo
+    container_name: api-dev
+    build:
+      dockerfile: Dockerfile.dev
+      context: ./api
+    restart: always
+    ports:
+      # <Port exposed> : < MySQL Port running inside container>
+      - '3005:3005'
+    expose:
+      # Opens port 3306 on the container
+      - '3005'
+    volumes:
+      - '/app/node_modules'
+      - './api:/app'
+    environment:
+      SECRET: a211221684
+      PORT: 3005
+      MONGO_DB: 'mongodb://localhost:27017/newApp'
+
+  client:
+    container_name: client-dev
+    build:
+      context: ./client
+      dockerfile: Dockerfile.dev
+    restart: always
+    ports:
+      # <Port exposed> : < MySQL Port running inside container>
+      - '3000:3000'
+    expose:
+      # Opens port 3306 on the container
+      - '3000'
+    volumes:
+      - '/app/node_modules'
+      - './client:/app'
+    stdin_open: true
+    tty: true

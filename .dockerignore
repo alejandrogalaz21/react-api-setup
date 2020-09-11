@@ -1,0 +1,16 @@
+*.md
+.git
+*.yml
+LICENSE
+.gitlab/
+.github/
+.vscode/
+.DS_Store
+CHANGELOG
+.directory
+.gitignore
+Dockerfile
+desktop.ini
+node_modules
+CONTRIBUTING.md
+Dockerfile.dev
