@@ -1,16 +1,16 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
-export const Users = ({ user, ...props }) => {
+export const Users = ({ users, ...props }) => {
   return (
     <div>
-      <pre>{JSON.stringify(user, ' ', 2)}</pre>
+      <pre>{JSON.stringify(users, ' ', 2)}</pre>
     </div>
   )
 }
 
 const mapStateToProps = state => ({
-  user: state.user
+  users: state.users
 })
 
 const mapDispatchToProps = {}
