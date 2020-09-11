@@ -1,21 +1,37 @@
 version: '3'
 
+volumes:
+  mongo: # Database
+  mongoc: # Mongo config
+
 services:
   mongo:
-    container_name: mongodb-dev
+    container_name: mongodb
     image: mongo:4.2
     ports:
       - 27017:27017
-    expose:
-      - '27017'
     restart: unless-stopped
-    volumes:
-      - ./mongo-volume:/data/db
+    # volumes:
+    #   - mongo:/data/db
+    #   - mongoc:/data/configdb
+
+  mongo-express:
+    container_name: mongo-express
+    depends_on:
+      - mongo
+    image: mongo-express
+    restart: always
+    ports:
+      - 8081:8081
+    environment:
+      ME_CONFIG_MONGODB_SERVER: mongo
+      ME_CONFIG_MONGODB_ADMINUSERNAME: root
+      ME_CONFIG_MONGODB_ADMINPASSWORD: example
 
   api:
     depends_on:
       - mongo
-    container_name: api-dev
+    container_name: api
     build:
       dockerfile: Dockerfile.dev
       context: ./api
@@ -32,10 +48,10 @@ services:
     environment:
       SECRET: a211221684
       PORT: 3005
-      MONGO_DB: 'mongodb://localhost:27017/newApp'
+      MONGO_DB: 'mongodb://mongo/app'
 
   client:
-    container_name: client-dev
+    container_name: client
     build:
       context: ./client
       dockerfile: Dockerfile.dev

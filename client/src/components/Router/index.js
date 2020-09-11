@@ -1,11 +1,14 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom'
+import { Switch, Route, Redirect } from 'react-router-dom'
 import { routes } from './routes'
+
+import { ConnectedRouter } from 'connected-react-router'
+import { history } from './../../redux/configureStore'
 
 function Router({ user, props }) {
   return (
-    <BrowserRouter>
+    <ConnectedRouter history={history}>
       <Switch>
         {routes.map((route, index) => {
           // route not protected
@@ -24,7 +27,7 @@ function Router({ user, props }) {
           return <Redirect to='/' />
         })}
       </Switch>
-    </BrowserRouter>
+    </ConnectedRouter>
   )
 }
 
