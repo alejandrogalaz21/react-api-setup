@@ -2,7 +2,11 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
 export const Users = ({ user, ...props }) => {
-  return <div>{JSON.parse(user, ' ', 2)}</div>
+  return (
+    <div>
+      <pre>{JSON.stringify(user, ' ', 2)}</pre>
+    </div>
+  )
 }
 
 const mapStateToProps = state => ({
