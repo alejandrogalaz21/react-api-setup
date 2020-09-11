@@ -16,6 +16,8 @@ import { PORT, MONGO_DB } from './keys'
 // route's
 import { apiRoutes } from './app/routes'
 
+console.log(MONGO_DB)
+
 // Create express instance's
 const app = express()
 const api = http.Server(app)
