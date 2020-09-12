@@ -5,6 +5,8 @@ import bcrypt from 'bcryptjs'
 import { generatePassword } from '../auth/auth.helper'
 import { generateMailer } from '../../mailer'
 import { ENV } from '../../keys'
+import { ErrorHandler } from '../../helpers/error.helper'
+// import { ,  } from '../../helpers/error.helper'
 const router = new Router()
 
 export function userController(Collection) {
@@ -20,7 +22,7 @@ export function userController(Collection) {
   // ======
   // Create
   // ======
-  async function create(req, res) {
+  async function create(req, res, next) {
     try {
       blue('users > controller > create')
       const newEntry = req.body
@@ -41,15 +43,14 @@ export function userController(Collection) {
 
       return res.send(result)
     } catch (error) {
-      red(error)
-      return res.status(500).send(error)
+      next(error)
     }
   }
 
   // =========
   // Read many
   // =========
-  async function readMany(req, res) {
+  async function readMany(req, res, next) {
     try {
       blue('users > controller > readMany')
       const query = req.query || {}
@@ -57,15 +58,14 @@ export function userController(Collection) {
       green(result)
       return res.json(result)
     } catch (error) {
-      red(error)
-      return res.status(500).send(error)
+      next(error)
     }
   }
 
   // ========
   // Read one
   // ========
-  async function readOne(req, res) {
+  async function readOne(req, res, next) {
     try {
       blue('users > controller > readOne')
       const { _id } = req.params
@@ -73,15 +73,14 @@ export function userController(Collection) {
       green(result)
       return res.send(result)
     } catch (error) {
-      red(error)
-      return res.status(500).send(error)
+      next(error)
     }
   }
 
   // ======
   // Update
   // ======
-  async function update(req, res) {
+  async function update(req, res, next) {
     try {
       blue('users > controller > update')
       const changedEntry = req.body
@@ -91,15 +90,14 @@ export function userController(Collection) {
       green(result)
       return res.send(result)
     } catch (error) {
-      red(error)
-      return res.status(500).send(error)
+      next(error)
     }
   }
 
   // ======
   // Remove
   // ======
-  async function remove(req, res) {
+  async function remove(req, res, next) {
     try {
       blue('users > controller > remove')
       const { _id } = req.params
@@ -107,8 +105,7 @@ export function userController(Collection) {
       green(result)
       return res.send(result)
     } catch (error) {
-      red(error)
-      return res.status(500).send(error)
+      next(error)
     }
   }
 
