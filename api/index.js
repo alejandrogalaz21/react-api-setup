@@ -15,6 +15,9 @@ import fileUpload from 'express-fileupload'
 import { PORT, MONGO_DB } from './keys'
 import { apiRoutes } from './app/routes'
 import { mongooseConnection } from './server/db/mongoose.connection'
+import { errorHandler } from './helpers/error.helper'
+import { red } from './helpers/chalk.helper'
+// import { handleError, errorHandler } from './helpers/error.helper'
 
 // Create express instance's
 const app = express()
@@ -36,12 +39,18 @@ app.use(files)
 
 // set app route's
 app.use('/api', apiRoutes)
-app.get('/*', (req, res, next) => res.send('hello world'))
+
+function errorCentralHandler(err, req, res, next) {
+  red(err)
+  const error = errorHandler(err)
+  return res.status(error.status).send(error)
+}
+
+app.use(errorCentralHandler)
 
 api.listen(PORT, () => {
   //Data Sources Instances
   mongooseConnection(MONGO_DB)
-
   console.log(chalk.green('server started :'))
   console.log(chalk.blue(`http://localhost:${PORT}`))
   console.log(chalk.yellow(`http://localhost:${PORT}/api`))
