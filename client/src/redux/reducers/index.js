@@ -7,6 +7,7 @@ import { connectRouter } from 'connected-react-router'
 import { app } from './app.reducer'
 import { user } from './../../components/User/user.redux'
 import { users } from './../../components/User/users.redux'
+import { products } from './../../components/Products/products.redux'
 
 export const router = connectRouter(createBrowserHistory())
 
@@ -15,5 +16,6 @@ export default combineReducers({
   form,
   app,
   user,
-  users
+  users,
+  products
 })

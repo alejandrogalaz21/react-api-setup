@@ -18,7 +18,7 @@ export function {{camelCase name}}Controller(Collection) {
   // ======
   async function create(req, res) {
     try {
-      blue('{{camelCase name}}s > controller > create')
+      blue('{{camelCase name}} > controller > create')
       const newEntry = req.body
 
       //fields validations
@@ -45,7 +45,7 @@ export function {{camelCase name}}Controller(Collection) {
   // =========
   async function readMany(req, res) {
     try {
-      blue('{{camelCase name}}s > controller > readMany')
+      blue('{{camelCase name}} > controller > readMany')
       let query = res.locals.query || {}
       const result = await Collection.find(query)
       green(result)
@@ -62,7 +62,7 @@ export function {{camelCase name}}Controller(Collection) {
 
   async function readOne(req, res) {
     try {
-      blue('{{camelCase name}}s > controller > readOne')
+      blue('{{camelCase name}} > controller > readOne')
       const { _id } = req.params
       const result = await Collection.findById(_id)
       green(result)
@@ -78,7 +78,7 @@ export function {{camelCase name}}Controller(Collection) {
   // ======
   async function update(req, res) {
     try {
-      blue('{{camelCase name}}s > controller > update')
+      blue('{{camelCase name}} > controller > update')
       //fields validations
       if (false) {
         res.status(400).send({ message: 'validation message' })
@@ -107,7 +107,7 @@ export function {{camelCase name}}Controller(Collection) {
   // ======
   async function remove(req, res) {
     try {
-      blue('{{camelCase name}}s > controller > remove')
+      blue('{{camelCase name}} > controller > remove')
       //fields validations
       if (false) {
         res.status(400).send({ message: 'validation message' })

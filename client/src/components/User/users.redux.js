@@ -20,26 +20,37 @@ export const USERS_REMOVE_SUCCESS = 'USERS_REMOVE_SUCCESS'
 export const USERS_REMOVE_FAILURE = 'USERS_REMOVE_FAILURE'
 
 // Action's
-export const usersCreateRequest = (payload = null) => ({type: USERS_CREATE_REQUEST, payload})
+export const usersCreateRequest = (payload = null) => ({ type: USERS_CREATE_REQUEST, payload })
 export const usersCreateSuccess = payload => ({ type: USERS_CREATE_SUCCESS, payload })
-export const usersCreateFailure = (payload = null) => ({type: USERS_CREATE_FAILURE, payload})
+export const usersCreateFailure = (payload = null) => ({ type: USERS_CREATE_FAILURE, payload })
 
-
-export const usersReadManyRequest = (payload = null) => ({type: USERS_READ_MANY_REQUEST, payload})
+export const usersReadManyRequest = (payload = null) => ({
+  type: USERS_READ_MANY_REQUEST,
+  payload
+})
 export const usersReadManySuccess = payload => ({ type: USERS_READ_MANY_SUCCESS, payload })
-export const usersReadManyFailure = (payload = null) => ({type: USERS_READ_MANY_FAILURE, payload})
+export const usersReadManyFailure = (payload = null) => ({
+  type: USERS_READ_MANY_FAILURE,
+  payload
+})
 
-export const usersReadOneRequest = (payload = null) => ({type: USERS_READ_ONE_REQUEST, payload})
+export const usersReadOneRequest = (payload = null) => ({
+  type: USERS_READ_ONE_REQUEST,
+  payload
+})
 export const usersReadOneSuccess = payload => ({ type: USERS_READ_ONE_SUCCESS, payload })
-export const usersReadOneFailure = (payload = null) => ({type: USERS_READ_ONE_FAILURE, payload})
+export const usersReadOneFailure = (payload = null) => ({
+  type: USERS_READ_ONE_FAILURE,
+  payload
+})
 
-export const usersUpdateRequest = (payload = null) => ({type: USERS_UPDATE_REQUEST, payload})
+export const usersUpdateRequest = (payload = null) => ({ type: USERS_UPDATE_REQUEST, payload })
 export const usersUpdateSuccess = payload => ({ type: USERS_UPDATE_SUCCESS, payload })
-export const usersUpdateFailure = (payload = null) => ({type: USERS_UPDATE_FAILURE, payload})
+export const usersUpdateFailure = (payload = null) => ({ type: USERS_UPDATE_FAILURE, payload })
 
-export const usersRemoveRequest = (payload = null) => ({type: USERS_REMOVE_REQUEST, payload})
+export const usersRemoveRequest = (payload = null) => ({ type: USERS_REMOVE_REQUEST, payload })
 export const usersRemoveSuccess = payload => ({ type: USERS_REMOVE_SUCCESS, payload })
-export const usersRemoveFailure = (payload = null) => ({type: USERS_REMOVE_FAILURE, payload})
+export const usersRemoveFailure = (payload = null) => ({ type: USERS_REMOVE_FAILURE, payload })
 
 // Reducer
 
