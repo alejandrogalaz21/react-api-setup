@@ -1,48 +1,44 @@
 import { Router } from 'express'
 import bcrypt from 'bcryptjs'
 import User from './../user/user'
-import { red, blue } from './../../helpers/chalk.helper'
+import { blue } from './../../helpers/chalk.helper'
 import { createJWT, generatePassword } from './auth.helper'
 import { EXPIRES_IN, SECRET, ENV } from '../../keys'
+import { ErrorHandler } from '../../helpers/error.helper'
 
 const router = new Router()
 
 export function authController(Collection) {
-  // ======
-  // Routes
-  // ======
   router.post('/login', login)
   router.put('/logout/:id', logout)
   router.post('/request-recover-password', requestRecoverPassword)
   router.post('/recover-password', recoverPassword)
   router.post('/reset-password', resetPassword)
 
-  async function login(req, res) {
+  async function login(req, res, next) {
     try {
       blue('auths > controller > login')
       const { email, password } = req.body
       const user = await Collection.findOne({ email }).lean()
 
       if (!user) {
-        return res.status(400).json({ message: 'Credenciales inválidas' })
+        throw new ErrorHandler({ status: 400, message: 'Acceso denegado' })
       } else if (user) {
         const correctCredentials = bcrypt.compareSync(password, user.password)
         if (!correctCredentials) {
-          return res.status(400).json({ message: 'Credenciales inválidas' })
+          throw new ErrorHandler({ status: 400, message: 'Credenciales inválidas' })
         } else if (user.isActive !== true) {
-          return res.status(400).json({ message: 'Usuario inactivo' })
+          throw new ErrorHandler({ status: 400, message: 'Usuario inactivo' })
         }
       }
       const token = await createJWT(user, SECRET, EXPIRES_IN)
       return res.status(200).json(token)
     } catch (error) {
-      red(error)
-      res.status(500).send(error)
-      return
+      next(error)
     }
   }
 
-  async function logout(req, res) {
+  async function logout(req, res, next) {
     try {
       const query = { _id: req.params.id }
       const user = await Collection.findOneAndUpdate(
@@ -52,12 +48,11 @@ export function authController(Collection) {
       )
       return res.status(200).json(user)
     } catch (error) {
-      console.log(error)
-      return res.status(500).json({ error })
+      next(error)
     }
   }
 
-  async function requestRecoverPassword(req, res) {
+  async function requestRecoverPassword(req, res, next) {
     try {
       const { email } = req.body
 
@@ -65,8 +60,11 @@ export function authController(Collection) {
       const doc = await Collection.findOne({ email })
 
       if (!doc) {
-        const description = 'Verifica con el administrador tu acceso al sistema'
-        return res.status(400).json({ message: 'Usuario no válido', description })
+        throw new ErrorHandler({
+          status: 400,
+          message: 'Verifica con el administrador tu acceso',
+          fields: { email: 'Usuario no válido' }
+        })
       }
 
       // Generate a 20 characters' recover token
@@ -98,15 +96,13 @@ export function authController(Collection) {
 
       return res.status(200).json({ message: 'Se envió un link de recuperación' })
     } catch (error) {
-      console.log(error)
-      return res.status(500).json({ error })
+      next(error)
     }
   }
 
-  async function recoverPassword(req, res) {
+  async function recoverPassword(req, res, next) {
     try {
       const { email, token, password } = req.body
-
       // Find the user with the given email and check if its token hasn't expired
       const user = await Collection.findOne({
         email,
@@ -133,14 +129,13 @@ export function authController(Collection) {
         return res.status(200).json(doc)
       }
       // Collection not found or its recovery token is not correct
-      return res.status(401).json({ message: 'No autorizado' })
+      throw new ErrorHandler({ status: 401, message: 'No autorizado' })
     } catch (error) {
-      console.log(error)
-      return res.status(500).json({ error })
+      next(error)
     }
   }
 
-  async function resetPassword(req, res) {
+  async function resetPassword(req, res, next) {
     try {
       const { password, newPassword } = req.body
       // Generate a random salt
@@ -161,10 +156,9 @@ export function authController(Collection) {
         return res.status(200).json(doc)
       }
       // Collection password is not correct
-      return res.status(400).json({ message: 'Contraseña provisional incorrecta' })
+      throw new ErrorHandler({ status: 400, message: 'Contraseña incorrecta' })
     } catch (error) {
-      console.log(error)
-      return res.status(500).json({ error })
+      next(error)
     }
   }
 
