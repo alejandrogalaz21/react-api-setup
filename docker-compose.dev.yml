@@ -6,7 +6,9 @@ services:
     build:
       context: ./mongodb
     ports:
-      - '27017:27017'
+      - '27018:27017'
+    volumes:
+      - 'mongo:/data/db'
 
   mongo-express:
     container_name: mongo-express
@@ -60,3 +62,6 @@ services:
       - './client:/app'
     stdin_open: true
     tty: true
+
+volumes:
+  mongo:
