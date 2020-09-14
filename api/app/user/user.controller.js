@@ -108,5 +108,4 @@ export function userController(Collection) {
   return router
 }
 
-const r = new Router()
-export const user = r.use('/user', userController(Model))
+export const user = new Router().use('/user', userController(Model))

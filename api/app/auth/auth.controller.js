@@ -165,5 +165,4 @@ export function authController(Collection) {
   return router
 }
 
-const r = new Router()
-export const auth = r.use('/auth', authController(User))
+export const auth = new Router().use('/auth', authController(User))

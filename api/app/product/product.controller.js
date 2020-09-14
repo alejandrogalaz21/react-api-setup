@@ -1,9 +1,9 @@
-import {{titleCase name}} from './{{camelCase name}}'
+import Product from './product'
 import { Router } from 'express'
 import { red, green, blue } from './../../helpers/chalk.helper'
 const router = new Router()
 
-export function {{camelCase name}}Controller(Collection) {
+export function productController(Collection) {
   const router = new Router()
 
   // ======
@@ -20,7 +20,7 @@ export function {{camelCase name}}Controller(Collection) {
   // ======
   async function create(req, res) {
     try {
-      blue('{{camelCase name}}s > controller > create')
+      blue('products > controller > create')
       const newEntry = req.body
 
       //fields validations
@@ -47,7 +47,7 @@ export function {{camelCase name}}Controller(Collection) {
   // =========
   async function readMany(req, res) {
     try {
-      blue('{{camelCase name}}s > controller > readMany')
+      blue('products > controller > readMany')
       let query = res.locals.query || {}
       const result = await Collection.find(query)
       green(result)
@@ -64,7 +64,7 @@ export function {{camelCase name}}Controller(Collection) {
 
   async function readOne(req, res) {
     try {
-      blue('{{camelCase name}}s > controller > readOne')
+      blue('products > controller > readOne')
       const { _id } = req.params
       const result = await Collection.findById(_id)
       green(result)
@@ -80,7 +80,7 @@ export function {{camelCase name}}Controller(Collection) {
   // ======
   async function update(req, res) {
     try {
-      blue('{{camelCase name}}s > controller > update')
+      blue('products > controller > update')
       //fields validations
       if (false) {
         res.status(400).send({ message: 'validation message' })
@@ -109,7 +109,7 @@ export function {{camelCase name}}Controller(Collection) {
   // ======
   async function remove(req, res) {
     try {
-      blue('{{camelCase name}}s > controller > remove')
+      blue('products > controller > remove')
       //fields validations
       if (false) {
         res.status(400).send({ message: 'validation message' })
@@ -135,4 +135,4 @@ export function {{camelCase name}}Controller(Collection) {
   return router
 }
 
-export const {{camelCase name}} = new Router().use('/{{camelCase name}}', {{camelCase name}}Controller({{titleCase name}}))
+export const product = new Router().use('/product', productController(Product))
