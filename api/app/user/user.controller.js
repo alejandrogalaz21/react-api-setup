@@ -5,17 +5,13 @@ import bcrypt from 'bcryptjs'
 import { generatePassword } from '../auth/auth.helper'
 import { generateMailer } from '../../mailer'
 import { ENV } from '../../keys'
-import { ErrorHandler } from '../../helpers/error.helper'
-// import { ,  } from '../../helpers/error.helper'
-const router = new Router()
 
 export function userController(Collection) {
-  // ======
-  // Routes
-  // ======
+  const router = new Router()
+
   router.post('/', create)
   router.get('/', readMany)
-  // router.get('/:_id', readOne)
+  router.get('/:_id', readOne)
   router.put('/:_id', update)
   router.delete('/:_id', remove)
 
@@ -112,4 +108,5 @@ export function userController(Collection) {
   return router
 }
 
-export const user = router.use('/user', userController(Model))
+const r = new Router()
+export const user = r.use('/user', userController(Model))

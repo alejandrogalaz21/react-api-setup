@@ -6,9 +6,9 @@ import { createJWT, generatePassword } from './auth.helper'
 import { EXPIRES_IN, SECRET, ENV } from '../../keys'
 import { ErrorHandler } from '../../helpers/error.helper'
 
-const router = new Router()
-
 export function authController(Collection) {
+  const router = new Router()
+
   router.post('/login', login)
   router.put('/logout/:id', logout)
   router.post('/request-recover-password', requestRecoverPassword)
@@ -165,4 +165,5 @@ export function authController(Collection) {
   return router
 }
 
-export const auth = router.use('/auth', authController(User))
+const r = new Router()
+export const auth = r.use('/auth', authController(User))
