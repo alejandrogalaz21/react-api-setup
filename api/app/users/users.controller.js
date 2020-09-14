@@ -20,6 +20,7 @@ export function usersController(Collection) {
   async function create(req, res, next) {
     try {
       blue('users > controller > create')
+      const { email } = req.body
       const newEntry = req.body
 
       //fields validations
@@ -28,8 +29,12 @@ export function usersController(Collection) {
       }
 
       // model validations
-      if (false) {
-        throw new ErrorHandler({ status: 400, message: 'validation message' })
+      if (await Collection.exists({ email })) {
+        throw new ErrorHandler({
+          status: 400,
+          message: 'El email no esta disponible',
+          fields: { email }
+        })
       }
 
       const result = await Collection.create(newEntry)

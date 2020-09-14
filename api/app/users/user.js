@@ -1,5 +1,5 @@
 import mongoose from 'mongoose'
-
+import { email } from './../../helpers/regex.helper'
 const Schema = mongoose.Schema
 const ObjectId = mongoose.Schema.ObjectId
 const schemaConfig = {
@@ -16,19 +16,8 @@ const schema = new Schema(
       trim: true,
       type: String,
       index: true,
-      unique: true,
-      required: [true, 'El email es requerido'],
-      validate: {
-        validator: value => {
-          if (regex.email.test(value)) {
-            return
-          }
-          if (value.length > 4) {
-            return
-          }
-        },
-        message: value => 'Email debe ser mayor a ocho caracteres'
-      }
+      unique: [true, 'El email debe ser unico'],
+      required: [true, 'El email es requerido']
     },
     password: {
       desc: 'user password',
@@ -76,5 +65,12 @@ const schema = new Schema(
 //schema.virtual('fullName').get(function () {
 //  return this.name + ' ' + this.lastName
 //})
+
+// validations
+schema.path('email').validate(value => {
+  if (!email.test(value)) {
+    throw new Error('Email no valido')
+  }
+}, 'email no valido')
 
 export default mongoose.model('user', schema)

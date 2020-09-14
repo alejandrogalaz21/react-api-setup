@@ -132,4 +132,4 @@ export function {{camelCase name}}sController(Collection) {
   return router
 }
 
-export const {{camelCase name}}s = router.use('/{{camelCase name}}s', {{camelCase name}}sController({{titleCase name}}))
+export const {{camelCase name}}s = new Router().use('/{{camelCase name}}s', {{camelCase name}}sController({{titleCase name}}))

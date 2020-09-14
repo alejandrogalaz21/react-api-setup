@@ -15,7 +15,8 @@ const schema = new Schema(
       desc: "Name",
       trim: true,
       type: String,
-      required: true
+      unique: [true, 'el nombre debe ser unico'],
+      required: [true, 'El nombre es requerido']
     },
     isActive: {
       desc: 'is Active.',
