@@ -54,4 +54,5 @@ api.listen(PORT, () => {
   console.log(chalk.green('server started :'))
   console.log(chalk.blue(`http://localhost:${PORT}`))
   console.log(chalk.yellow(`http://localhost:${PORT}/api`))
+  console.log(chalk.yellow(`Data Base URL : ${MONGO_DB}`))
 })

@@ -1,11 +1,10 @@
-import {{titleCase name}} from './{{camelCase name}}'
+import User from './user'
 import { Router } from 'express'
 import { red, green, blue } from './../../helpers/chalk.helper'
+import { ErrorHandler } from '../../helpers/error.helper'
 const router = new Router()
 
-export function {{camelCase name}}Controller(Collection) {
-  const router = new Router()
-
+export function usersController(Collection) {
   // ======
   // Routes
   // ======
@@ -20,17 +19,17 @@ export function {{camelCase name}}Controller(Collection) {
   // ======
   async function create(req, res) {
     try {
-      blue('{{camelCase name}}s > controller > create')
+      blue('users > controller > create')
       const newEntry = req.body
 
       //fields validations
       if (false) {
-        return res.status(400).send({ message: 'validation message' })
+        throw new ErrorHandler({ status: 400, message: 'validation message' })
       }
 
       // model validations
       if (false) {
-        return res.status(400).send({ message: 'validation message' })
+        throw new ErrorHandler({ status: 400, message: 'validation message' })
       }
 
       const result = await Collection.create(newEntry)
@@ -38,7 +37,7 @@ export function {{camelCase name}}Controller(Collection) {
       return res.send(result)
     } catch (error) {
       red(error)
-      return res.status(500).send(error)
+      next(error)
     }
   }
 
@@ -47,14 +46,14 @@ export function {{camelCase name}}Controller(Collection) {
   // =========
   async function readMany(req, res) {
     try {
-      blue('{{camelCase name}}s > controller > readMany')
-      let query = res.locals.query || {}
+      blue('users > controller > readMany')
+      let query = req.query || {}
       const result = await Collection.find(query)
       green(result)
       return res.send(result)
     } catch (error) {
       red(error)
-      return res.status(500).send(error)
+      next(error)
     }
   }
 
@@ -64,14 +63,14 @@ export function {{camelCase name}}Controller(Collection) {
 
   async function readOne(req, res) {
     try {
-      blue('{{camelCase name}}s > controller > readOne')
+      blue('users > controller > readOne')
       const { _id } = req.params
       const result = await Collection.findById(_id)
       green(result)
       return res.send(result)
     } catch (error) {
       red(error)
-      return res.status(500).send(error)
+      next(error)
     }
   }
 
@@ -80,17 +79,16 @@ export function {{camelCase name}}Controller(Collection) {
   // ======
   async function update(req, res) {
     try {
-      blue('{{camelCase name}}s > controller > update')
+      blue('users > controller > update')
+
       //fields validations
       if (false) {
-        res.status(400).send({ message: 'validation message' })
-        return
+        throw new ErrorHandler({ status: 400, message: 'validation message' })
       }
 
       // model validations
       if (false) {
-        res.status(400).send({ message: 'validation message' })
-        return
+        throw new ErrorHandler({ status: 400, message: 'validation message' })
       }
 
       const changedEntry = req.body
@@ -100,7 +98,7 @@ export function {{camelCase name}}Controller(Collection) {
       return res.send(result)
     } catch (error) {
       red(error)
-      return res.status(500).send(error)
+      next(error)
     }
   }
 
@@ -109,17 +107,16 @@ export function {{camelCase name}}Controller(Collection) {
   // ======
   async function remove(req, res) {
     try {
-      blue('{{camelCase name}}s > controller > remove')
+      blue('users > controller > remove')
+
       //fields validations
       if (false) {
-        res.status(400).send({ message: 'validation message' })
-        return
+        throw new ErrorHandler({ status: 400, message: 'validation message' })
       }
 
       // model validations
       if (false) {
-        res.status(400).send({ message: 'validation message' })
-        return
+        throw new ErrorHandler({ status: 400, message: 'validation message' })
       }
 
       const { _id } = req.params
@@ -128,11 +125,11 @@ export function {{camelCase name}}Controller(Collection) {
       return res.send(result)
     } catch (error) {
       red(error)
-      return res.status(500).send(error)
+      next(error)
     }
   }
 
   return router
 }
 
-export const {{camelCase name}} = new Router().use('/{{camelCase name}}', {{camelCase name}}Controller({{titleCase name}}))
+export const users = router.use('/users', usersController(User))

@@ -11,7 +11,12 @@ const schemaConfig = {
 
 const schema = new Schema(
   {
-   
+    name: {
+      desc: "Name",
+      trim: true,
+      type: String,
+      required: true
+    },
     isActive: {
       desc: 'is Active.',
       type: Boolean,

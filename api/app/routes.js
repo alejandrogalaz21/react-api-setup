@@ -1,5 +1,5 @@
-import { user } from './user/user.controller'
-import { product } from './product/product.controller'
+import { users } from './users/users.controller'
+
 import { auth } from './auth/auth.controller'
 
-export const apiRoutes = [user, auth, product]
+export const apiRoutes = [auth, users]

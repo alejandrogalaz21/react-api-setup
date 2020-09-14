@@ -1,6 +1,6 @@
 import { Router } from 'express'
 import bcrypt from 'bcryptjs'
-import User from './../user/user'
+import User from './../users/user'
 import { blue } from './../../helpers/chalk.helper'
 import { createJWT, generatePassword } from './auth.helper'
 import { EXPIRES_IN, SECRET, ENV } from '../../keys'
