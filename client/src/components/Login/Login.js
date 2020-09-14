@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { connect } from 'react-redux'
 import LoginForm from './LoginForm'
-import FormExample from '../FormExample'
 
 export const Login = ({ user, ...props }) => {
   useEffect(() => {
@@ -40,8 +39,7 @@ export const Login = ({ user, ...props }) => {
                     <div className='text-center'>
                       <h1 className='h4 text-gray-900 mb-4'>Welcome Back!</h1>
                     </div>
-                    <FormExample />
-                    {/* <LoginForm /> */}
+                    <LoginForm />
                     <hr />
                     <div className='text-center'>
                       <a className='small' href='forgot-password.html'>

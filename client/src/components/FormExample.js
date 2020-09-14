@@ -15,7 +15,10 @@ function FormExample({ handleSubmit, pristine, submitting, reset }) {
   }
 
   return (
-    <Form onSubmit={handleSubmit(handleClickSubmit)} className='form-example'>
+    <Form
+      onSubmit={handleSubmit(handleClickSubmit)}
+      className='form-example m-5'
+      style={{ width: 400 }}>
       <RFInput name='name' type='text' label='Nombre completo' />
 
       <RFRadio
