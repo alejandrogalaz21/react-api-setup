@@ -3,6 +3,7 @@ import About from './../About'
 import Login from './../Login/Login'
 import Dashboard from './../Dashboard/Dashboard'
 import Users from './../User/Users'
+import FormExample from '../FormExample'
 
 export const routes = [
   {
@@ -24,5 +25,9 @@ export const routes = [
   {
     path: '/users',
     component: Users
+  },
+  {
+    path: '/form',
+    component: FormExample
   }
 ]

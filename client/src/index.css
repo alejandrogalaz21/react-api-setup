@@ -26,3 +26,13 @@ body {
 main > .container {
   padding: 60px 15px 0;
 }
+
+input,
+select,
+textarea {
+  width: 100%;
+}
+
+input[type='radio'] {
+  width: auto;
+}
