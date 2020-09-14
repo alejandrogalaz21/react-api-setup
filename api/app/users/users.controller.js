@@ -17,7 +17,7 @@ export function usersController(Collection) {
   // ======
   // Create
   // ======
-  async function create(req, res) {
+  async function create(req, res, next) {
     try {
       blue('users > controller > create')
       const newEntry = req.body
@@ -44,7 +44,7 @@ export function usersController(Collection) {
   // =========
   // Read many
   // =========
-  async function readMany(req, res) {
+  async function readMany(req, res, next) {
     try {
       blue('users > controller > readMany')
       let query = req.query || {}
@@ -61,7 +61,7 @@ export function usersController(Collection) {
   // Read one
   // ========
 
-  async function readOne(req, res) {
+  async function readOne(req, res, next) {
     try {
       blue('users > controller > readOne')
       const { _id } = req.params
@@ -77,7 +77,7 @@ export function usersController(Collection) {
   // ======
   // Update
   // ======
-  async function update(req, res) {
+  async function update(req, res, next) {
     try {
       blue('users > controller > update')
 
@@ -105,7 +105,7 @@ export function usersController(Collection) {
   // ======
   // Remove
   // ======
-  async function remove(req, res) {
+  async function remove(req, res, next) {
     try {
       blue('users > controller > remove')
 

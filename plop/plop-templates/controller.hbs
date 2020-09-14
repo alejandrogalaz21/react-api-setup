@@ -17,7 +17,7 @@ export function {{camelCase name}}sController(Collection) {
   // ======
   // Create
   // ======
-  async function create(req, res) {
+  async function create(req, res, next) {
     try {
       blue('{{camelCase name}}s > controller > create')
       const newEntry = req.body
@@ -44,7 +44,7 @@ export function {{camelCase name}}sController(Collection) {
   // =========
   // Read many
   // =========
-  async function readMany(req, res) {
+  async function readMany(req, res, next) {
     try {
       blue('{{camelCase name}}s > controller > readMany')
       let query = req.query || {}
@@ -61,7 +61,7 @@ export function {{camelCase name}}sController(Collection) {
   // Read one
   // ========
 
-  async function readOne(req, res) {
+  async function readOne(req, res, next) {
     try {
       blue('{{camelCase name}}s > controller > readOne')
       const { _id } = req.params
@@ -77,7 +77,7 @@ export function {{camelCase name}}sController(Collection) {
   // ======
   // Update
   // ======
-  async function update(req, res) {
+  async function update(req, res, next) {
     try {
       blue('{{camelCase name}}s > controller > update')
       
@@ -105,7 +105,7 @@ export function {{camelCase name}}sController(Collection) {
   // ======
   // Remove
   // ======
-  async function remove(req, res) {
+  async function remove(req, res, next) {
     try {
       blue('{{camelCase name}}s > controller > remove')
      

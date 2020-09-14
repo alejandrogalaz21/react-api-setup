@@ -20,10 +20,14 @@ const schema = new Schema(
       required: [true, 'El email es requerido'],
       validate: {
         validator: value => {
-          return value.length > 8
-          // regex.email.test(value)
+          if (regex.email.test(value)) {
+            return
+          }
+          if (value.length > 4) {
+            return
+          }
         },
-        message: 'Email debe ser mayor a ocho caracteres'
+        message: value => 'Email debe ser mayor a ocho caracteres'
       }
     },
     password: {
