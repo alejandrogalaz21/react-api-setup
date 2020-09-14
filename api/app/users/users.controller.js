@@ -1,13 +1,14 @@
 import User from './user'
 import { Router } from 'express'
-import { red, green, blue } from './../../helpers/chalk.helper'
-import { ErrorHandler } from '../../helpers/error.helper'
-const router = new Router()
+import { green, blue } from './../../helpers/chalk.helper'
+import bcrypt from 'bcryptjs'
+import { generatePassword } from '../auth/auth.helper'
+import { generateMailer } from '../../mailer'
+import { ENV } from '../../keys'
 
 export function usersController(Collection) {
-  // ======
-  // Routes
-  // ======
+  const router = new Router()
+
   router.post('/', create)
   router.get('/', readMany)
   router.get('/:_id', readOne)
@@ -20,28 +21,24 @@ export function usersController(Collection) {
   async function create(req, res, next) {
     try {
       blue('users > controller > create')
-      const { email } = req.body
       const newEntry = req.body
+      const password = generatePassword(10)
+      const salt = await bcrypt.genSalt(10)
+      const hashed = await bcrypt.hash(password, salt)
+      const result = await Collection.create({ ...newEntry, password: hashed })
 
-      //fields validations
-      if (false) {
-        throw new ErrorHandler({ status: 400, message: 'validation message' })
-      }
+      const hostname = ENV === 'development' ? 'localhost:5001' : host
+      const url = `http://${hostname}/login`
 
-      // model validations
-      if (await Collection.exists({ email })) {
-        throw new ErrorHandler({
-          status: 400,
-          message: 'El email no esta disponible',
-          fields: { email }
-        })
-      }
+      const mailer = await generateMailer()
+      await mailer.send({
+        template: 'register',
+        message: { to: result.email },
+        locals: { url, password }
+      })
 
-      const result = await Collection.create(newEntry)
-      green(result)
       return res.send(result)
     } catch (error) {
-      red(error)
       next(error)
     }
   }
@@ -52,12 +49,11 @@ export function usersController(Collection) {
   async function readMany(req, res, next) {
     try {
       blue('users > controller > readMany')
-      let query = req.query || {}
-      const result = await Collection.find(query)
+      const query = req.query || {}
+      const result = await Collection.find(query).select('-password')
       green(result)
-      return res.send(result)
+      return res.json(result)
     } catch (error) {
-      red(error)
       next(error)
     }
   }
@@ -65,16 +61,14 @@ export function usersController(Collection) {
   // ========
   // Read one
   // ========
-
   async function readOne(req, res, next) {
     try {
       blue('users > controller > readOne')
       const { _id } = req.params
-      const result = await Collection.findById(_id)
+      const result = await Collection.findById(_id).select('-password')
       green(result)
       return res.send(result)
     } catch (error) {
-      red(error)
       next(error)
     }
   }
@@ -85,24 +79,13 @@ export function usersController(Collection) {
   async function update(req, res, next) {
     try {
       blue('users > controller > update')
-
-      //fields validations
-      if (false) {
-        throw new ErrorHandler({ status: 400, message: 'validation message' })
-      }
-
-      // model validations
-      if (false) {
-        throw new ErrorHandler({ status: 400, message: 'validation message' })
-      }
-
       const changedEntry = req.body
       const { _id } = req.params
-      const result = await Collection.update({ _id }, { $set: changedEntry })
+      delete changedEntry.password
+      const result = await Collection.update({ _id }, changedEntry, { new: true })
       green(result)
       return res.send(result)
     } catch (error) {
-      red(error)
       next(error)
     }
   }
@@ -113,23 +96,11 @@ export function usersController(Collection) {
   async function remove(req, res, next) {
     try {
       blue('users > controller > remove')
-
-      //fields validations
-      if (false) {
-        throw new ErrorHandler({ status: 400, message: 'validation message' })
-      }
-
-      // model validations
-      if (false) {
-        throw new ErrorHandler({ status: 400, message: 'validation message' })
-      }
-
       const { _id } = req.params
       const result = await Collection.remove(_id)
       green(result)
       return res.send(result)
     } catch (error) {
-      red(error)
       next(error)
     }
   }

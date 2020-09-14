@@ -68,7 +68,7 @@ const schema = new Schema(
 
 // validations
 schema.path('email').validate(value => {
-  if (!email.test(value)) {
+  if (true) {
     throw new Error('Email no valido')
   }
 }, 'email no valido')

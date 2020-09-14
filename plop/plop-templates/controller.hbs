@@ -1,10 +1,12 @@
 import {{titleCase name}} from './{{camelCase name}}'
 import { Router } from 'express'
-import { red, green, blue } from './../../helpers/chalk.helper'
+import { green, blue } from './../../helpers/chalk.helper'
 import { ErrorHandler } from '../../helpers/error.helper'
-const router = new Router()
 
-export function {{camelCase name}}sController(Collection) {
+
+export function {{camelCase name}}sController({{camelCase name}}) {
+  const router = new Router()
+
   // ======
   // Routes
   // ======
@@ -32,11 +34,10 @@ export function {{camelCase name}}sController(Collection) {
         throw new ErrorHandler({status: 400, message: 'validation message' })
       }
 
-      const result = await Collection.create(newEntry)
+      const result = await {{camelCase name}}.create(newEntry)
       green(result)
       return res.send(result)
     } catch (error) {
-      red(error)
       next(error)
     }
   }
@@ -48,11 +49,10 @@ export function {{camelCase name}}sController(Collection) {
     try {
       blue('{{camelCase name}}s > controller > readMany')
       let query = req.query || {}
-      const result = await Collection.find(query)
+      const result = await {{camelCase name}}.find(query)
       green(result)
       return res.send(result)
     } catch (error) {
-      red(error)
       next(error)
     }
   }
@@ -65,11 +65,10 @@ export function {{camelCase name}}sController(Collection) {
     try {
       blue('{{camelCase name}}s > controller > readOne')
       const { _id } = req.params
-      const result = await Collection.findById(_id)
+      const result = await {{camelCase name}}.findById(_id)
       green(result)
       return res.send(result)
     } catch (error) {
-      red(error)
       next(error)
     }
   }
@@ -93,11 +92,10 @@ export function {{camelCase name}}sController(Collection) {
 
       const changedEntry = req.body
       const { _id } = req.params
-      const result = await Collection.update({ _id }, { $set: changedEntry })
+      const result = await {{camelCase name}}.update({ _id }, { $set: changedEntry })
       green(result)
       return res.send(result)
     } catch (error) {
-      red(error)
       next(error)
     }
   }
@@ -120,11 +118,10 @@ export function {{camelCase name}}sController(Collection) {
       }
 
       const { _id } = req.params
-      const result = await Collection.remove(_id)
+      const result = await {{camelCase name}}.remove(_id)
       green(result)
       return res.send(result)
     } catch (error) {
-      red(error)
       next(error)
     }
   }
