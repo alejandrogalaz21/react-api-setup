@@ -132,4 +132,4 @@ export function usersController(Collection) {
   return router
 }
 
-export const users = router.use('/users', usersController(User))
+export const users = new Router().use('/users', usersController(User))
