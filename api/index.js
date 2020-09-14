@@ -11,13 +11,11 @@ import bodyParser from './server/middleware/bodyParser'
 import passportJwt from './server/middleware/jwtMiddleware'
 import cors from './server/middleware/cors'
 import fileUpload from 'express-fileupload'
+import { errorCentralHandler } from './server/middleware/errorHandler.middleware'
 
 import { PORT, MONGO_DB } from './keys'
 import { apiRoutes } from './app/routes'
 import { mongooseConnection } from './server/db/mongoose.connection'
-import { errorHandler } from './helpers/error.helper'
-import { red } from './helpers/chalk.helper'
-// import { handleError, errorHandler } from './helpers/error.helper'
 
 // Create express instance's
 const app = express()
@@ -36,16 +34,9 @@ app.use(bodyParser)
 app.use(passportJwt)
 app.use(cors)
 app.use(files)
-
 // set app route's
 app.use('/api', apiRoutes)
-
-function errorCentralHandler(err, req, res, next) {
-  red(err)
-  const error = errorHandler(err)
-  return res.status(error.status).send(error)
-}
-
+// Error Handler
 app.use(errorCentralHandler)
 
 api.listen(PORT, () => {
@@ -54,4 +45,5 @@ api.listen(PORT, () => {
   console.log(chalk.green('server started :'))
   console.log(chalk.blue(`http://localhost:${PORT}`))
   console.log(chalk.yellow(`http://localhost:${PORT}/api`))
+  console.log(chalk.yellow(`Data Base URL ${MONGO_DB}`))
 })

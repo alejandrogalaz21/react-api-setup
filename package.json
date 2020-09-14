@@ -1,7 +1,7 @@
 {
-  "name": "code-generator",
+  "name": "full-stack",
   "version": "1.0.0",
-  "description": "simple code generator",
+  "description": "full stack app",
   "main": "index.js",
   "scripts": {
     "start": "plop"

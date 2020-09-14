@@ -1,19 +1,13 @@
 version: '3'
 
-volumes:
-  mongo: # Database
-  mongoc: # Mongo config
-
 services:
   mongo:
     container_name: mongodb
     image: mongo:4.2
     ports:
-      - 27017:27017
-    restart: unless-stopped
-    # volumes:
-    #   - mongo:/data/db
-    #   - mongoc:/data/configdb
+      - '27018:27017'
+    volumes:
+      - 'mongo:/data/db'
 
   mongo-express:
     container_name: mongo-express
@@ -67,3 +61,6 @@ services:
       - './client:/app'
     stdin_open: true
     tty: true
+
+volumes:
+  mongo:

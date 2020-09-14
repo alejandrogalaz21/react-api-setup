@@ -1,6 +1,5 @@
 import mongoose from 'mongoose'
-import * as regex from './../../helpers/regex'
-
+import { email } from './../../helpers/regex.helper'
 const Schema = mongoose.Schema
 const ObjectId = mongoose.Schema.ObjectId
 const schemaConfig = {
@@ -17,22 +16,14 @@ const schema = new Schema(
       trim: true,
       type: String,
       index: true,
-      unique: true,
-      required: true,
-      validate: {
-        validator: email => regex.email.test(email),
-        message: 'Not a valid email'
-      }
+      required: [true, 'El email es requerido']
     },
     password: {
       desc: 'user password',
       trim: true,
       type: String,
       required: true,
-      validate: {
-        validator: password => regex.password.test(password),
-        message: 'Minimum eight characters, at least one letter and one number'
-      }
+      select: false
     },
     name: {
       desc: "The user's name.",
@@ -42,11 +33,7 @@ const schema = new Schema(
     },
     age: {
       desc: "The users's age.",
-      type: Number,
-      validate: {
-        validator: v => v > 0,
-        message: 'Age must be greater than 0'
-      }
+      type: Number
     },
     gender: {
       desc: 'user gender.',
@@ -56,18 +43,18 @@ const schema = new Schema(
       default: 'Others',
       required: true
     },
+    isActive: {
+      desc: 'is Active.',
+      type: Boolean,
+      default: true,
+      required: true
+    },
     userType: {
       desc: 'user roles.',
       trim: true,
       type: String,
       enum: ['Admin', 'User'],
       default: 'Admin',
-      required: true
-    },
-    isActive: {
-      desc: 'is Active.',
-      type: Boolean,
-      default: true,
       required: true
     }
   },
@@ -77,5 +64,18 @@ const schema = new Schema(
 //schema.virtual('fullName').get(function () {
 //  return this.name + ' ' + this.lastName
 //})
+
+// validations
+schema.path('email').validate(value => {
+  if (!email.test(value)) {
+    throw new Error('Email no valido')
+  }
+})
+
+schema.path('email').validate(async value => {
+  if (await mongoose.models.user.exists({ email: value })) {
+    throw new Error('Email ya existe')
+  }
+})
 
 export default mongoose.model('user', schema)

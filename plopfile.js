@@ -6,23 +6,23 @@ module.exports = function (plop) {
       {
         type: 'input',
         name: 'name',
-        message: 'module name please',
-      },
+        message: 'module name please'
+      }
     ],
     actions: [
       {
         type: 'add',
-        path: 'api/app/{{camelCase name}}/{{camelCase name}}.controller.js',
-        templateFile: 'plop/plop-templates/module-controller.js.hbs',
-        skipIfExists: true,
+        path: 'api/app/{{camelCase name}}s/{{camelCase name}}s.controller.js',
+        templateFile: 'plop/plop-templates/controller.hbs',
+        skipIfExists: true
       },
       {
         type: 'add',
-        path: 'api/app/{{camelCase name}}/{{camelCase name}}.js',
-        templateFile: 'plop/plop-templates/model.js.hbs',
-        skipIfExists: true,
-      },
-    ],
+        path: 'api/app/{{camelCase name}}s/{{camelCase name}}.js',
+        templateFile: 'plop/plop-templates/model.hbs',
+        skipIfExists: true
+      }
+    ]
   })
   // controller generator
   plop.setGenerator('controller', {
@@ -31,22 +31,22 @@ module.exports = function (plop) {
       {
         type: 'input',
         name: 'dir',
-        message: 'what dir please ?',
+        message: 'what dir please ?'
       },
       {
         type: 'input',
         name: 'name',
-        message: 'controller name please',
-      },
+        message: 'controller name please'
+      }
     ],
     actions: [
       {
         type: 'add',
         path: 'api/app/{{dir}}/{{camelCase name}}.controller.js',
-        templateFile: 'plop/plop-templates/controller.js.hbs',
-        skipIfExists: true,
-      },
-    ],
+        templateFile: 'plop/plop-templates/controller.hbs',
+        skipIfExists: true
+      }
+    ]
   })
   // model
   plop.setGenerator('model', {
@@ -55,21 +55,21 @@ module.exports = function (plop) {
       {
         type: 'input',
         name: 'dir',
-        message: 'what dir please ?',
+        message: 'what dir please ?'
       },
       {
         type: 'input',
         name: 'name',
-        message: 'model name please',
-      },
+        message: 'model name please'
+      }
     ],
     actions: [
       {
         type: 'add',
         path: 'api/app/{{dir}}/{{camelCase name}}.js',
-        templateFile: 'plop/plop-templates/model.js.hbs',
-        skipIfExists: true,
-      },
-    ],
+        templateFile: 'plop/plop-templates/model.hbs',
+        skipIfExists: true
+      }
+    ]
   })
 }

@@ -1,12 +1,12 @@
-import Model from './user'
+import User from './user'
 import { Router } from 'express'
-import { red, green, blue } from './../../helpers/chalk.helper'
+import { green, blue } from './../../helpers/chalk.helper'
 import bcrypt from 'bcryptjs'
 import { generatePassword } from '../auth/auth.helper'
 import { generateMailer } from '../../mailer'
 import { ENV } from '../../keys'
 
-export function userController(Collection) {
+export function usersController(Collection) {
   const router = new Router()
 
   router.post('/', create)
@@ -108,4 +108,4 @@ export function userController(Collection) {
   return router
 }
 
-export const user = new Router().use('/user', userController(Model))
+export const users = new Router().use('/users', usersController(User))

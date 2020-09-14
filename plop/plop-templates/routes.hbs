@@ -1,0 +1,78 @@
+import * as group from './../controllers/{{name}}'
+import { Router } from 'express'
+
+const router = new Router()
+
+/**
+ *@access    Private
+ *@route     GET api/{{name}}
+ *@desc      get all the records.
+ *@params    none.
+ */
+router.get('/{{name}}',   (req, res) => {console.log('{{name}} 1')})
+
+/**
+ *@access    Private
+ *@route     GET api/{{name}}/uuid
+ *@desc      get single record.
+ *@params    id
+ */
+router.get('/{{name}}/id',   (req, res) => {console.log('{{name}} 2')})
+
+/**
+ *@access    Private
+ *@route     POST api/{{name}}
+ *@desc      create a record.
+ *@params    none
+ */
+router.post('/{{name}}',   group.create)
+
+/**
+ *@access    Private
+ *@route     POST api/{{name}}/validate
+ *@desc      validate a record.
+ *@params    none
+ */
+router.post('/{{name}}/validate',  (req, res) => {console.log('{{name}} 3')})
+
+/**
+ * @access    Private
+ * @route     PUT api/{{name}}/uuid
+ * @desc      update a record.
+ * @params    id, Object.
+ */
+router.put('/{{name}}/id',   (req, res) => {console.log('{{name}} 4')})
+
+/**
+ *@access    Private
+ *@route     PUT api/{{name}}/toggle/id
+ *@desc      toggle (active/inactive) a record
+ *@params    id
+ */
+router.put('/{{name}}/toggle/id',   (req, res) => {console.log('{{name}} 5')})
+
+/**
+ *@access    Private
+ *@route     DELETE api/{{name}}/id
+ *@desc      delete a record
+ *@params    id
+ */
+router.delete('/{{name}}/id',   (req, res) => {console.log('{{name}} 6')})
+
+/**
+ *@access    Private
+ *@route     /{{name}}/export/report/pdf
+ *@desc      delete a record
+ *@params    none
+ */
+router.get('/{{name}}/export/report/pdf',   (req, res) => {console.log('{{name}} 7')})
+
+/**
+ *@access    Private
+ *@route     /{{name}}/export/report/pdf
+ *@desc      delete a record
+ *@params    id
+ */
+router.get('/{{name}}/export/report/pdf/id',   (req, res) => {console.log('{{name}} 8')})
+
+export default router

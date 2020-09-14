@@ -11,7 +11,12 @@ const schemaConfig = {
 
 const schema = new Schema(
   {
-   
+    name: {
+      desc: "Name",
+      trim: true,
+      type: String,
+      required: [true, 'El nombre es requerido']
+    },
     isActive: {
       desc: 'is Active.',
       type: Boolean,
@@ -26,4 +31,11 @@ const schema = new Schema(
 //  return this.name + ' ' + this.lastName
 //})
 
-export default mongoose.model('{{camelCase name}}', schema)
+// check if is unique
+schema.path('name').validate(async value => {
+  if (await mongoose.models.product.exists({ name: value })) {
+    throw new Error('ya existe')
+  }
+})
+
+export default mongoose.model('product', schema)

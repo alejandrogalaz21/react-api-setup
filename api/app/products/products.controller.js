@@ -1,9 +1,10 @@
 import Product from './product'
 import { Router } from 'express'
-import { red, green, blue } from './../../helpers/chalk.helper'
-const router = new Router()
+import { green, blue } from './../../helpers/chalk.helper'
+import { ErrorHandler } from '../../helpers/error.helper'
 
-export function productController(Collection) {
+
+export function productsController(product) {
   const router = new Router()
 
   // ======
@@ -18,43 +19,41 @@ export function productController(Collection) {
   // ======
   // Create
   // ======
-  async function create(req, res) {
+  async function create(req, res, next) {
     try {
       blue('products > controller > create')
       const newEntry = req.body
 
       //fields validations
       if (false) {
-        return res.status(400).send({ message: 'validation message' })
+        throw new ErrorHandler({status: 400, message: 'validation message' })
       }
 
       // model validations
       if (false) {
-        return res.status(400).send({ message: 'validation message' })
+        throw new ErrorHandler({status: 400, message: 'validation message' })
       }
 
-      const result = await Collection.create(newEntry)
+      const result = await product.create(newEntry)
       green(result)
       return res.send(result)
     } catch (error) {
-      red(error)
-      return res.status(500).send(error)
+      next(error)
     }
   }
 
   // =========
   // Read many
   // =========
-  async function readMany(req, res) {
+  async function readMany(req, res, next) {
     try {
       blue('products > controller > readMany')
-      let query = res.locals.query || {}
-      const result = await Collection.find(query)
+      let query = req.query || {}
+      const result = await product.find(query)
       green(result)
       return res.send(result)
     } catch (error) {
-      red(error)
-      return res.status(500).send(error)
+      next(error)
     }
   }
 
@@ -62,77 +61,72 @@ export function productController(Collection) {
   // Read one
   // ========
 
-  async function readOne(req, res) {
+  async function readOne(req, res, next) {
     try {
       blue('products > controller > readOne')
       const { _id } = req.params
-      const result = await Collection.findById(_id)
+      const result = await product.findById(_id)
       green(result)
       return res.send(result)
     } catch (error) {
-      red(error)
-      return res.status(500).send(error)
+      next(error)
     }
   }
 
   // ======
   // Update
   // ======
-  async function update(req, res) {
+  async function update(req, res, next) {
     try {
       blue('products > controller > update')
+      
       //fields validations
       if (false) {
-        res.status(400).send({ message: 'validation message' })
-        return
+        throw new ErrorHandler({status: 400, message: 'validation message' })
       }
 
       // model validations
       if (false) {
-        res.status(400).send({ message: 'validation message' })
-        return
+        throw new ErrorHandler({status: 400, message: 'validation message' })
       }
 
       const changedEntry = req.body
       const { _id } = req.params
-      const result = await Collection.update({ _id }, { $set: changedEntry })
+      const result = await product.update({ _id }, { $set: changedEntry })
       green(result)
       return res.send(result)
     } catch (error) {
-      red(error)
-      return res.status(500).send(error)
+      next(error)
     }
   }
 
   // ======
   // Remove
   // ======
-  async function remove(req, res) {
+  async function remove(req, res, next) {
     try {
       blue('products > controller > remove')
-      //fields validations
+     
+     //fields validations
       if (false) {
-        res.status(400).send({ message: 'validation message' })
-        return
+        throw new ErrorHandler({status: 400, message: 'validation message' })
       }
 
       // model validations
       if (false) {
-        res.status(400).send({ message: 'validation message' })
-        return
+        throw new ErrorHandler({status: 400, message: 'validation message' })
       }
 
       const { _id } = req.params
-      const result = await Collection.remove(_id)
+      const result = await product.remove(_id)
       green(result)
       return res.send(result)
     } catch (error) {
-      red(error)
-      return res.status(500).send(error)
+      next(error)
     }
   }
 
   return router
 }
 
-export const product = new Router().use('/product', productController(Product))
+export const products = new Router().use('/products', productsController(Product))
