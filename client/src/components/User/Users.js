@@ -1,10 +1,18 @@
-import React, { Component } from 'react'
+import React, { useState } from 'react'
 import { connect } from 'react-redux'
+import UsersForm from './UsersForm'
 
 export const Users = ({ users, ...props }) => {
+  const [add, setAdd] = useState(false)
+
   return (
-    <div>
-      <pre>{JSON.stringify(users, ' ', 2)}</pre>
+    <div className='container'>
+      <div className='row'>
+        <UsersForm />
+      </div>
+      <div className='row'>
+        <pre>{JSON.stringify(users, ' ', 2)}</pre>
+      </div>
     </div>
   )
 }
