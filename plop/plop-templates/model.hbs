@@ -15,7 +15,6 @@ const schema = new Schema(
       desc: "Name",
       trim: true,
       type: String,
-      unique: [true, 'el nombre debe ser unico'],
       required: [true, 'El nombre es requerido']
     },
     isActive: {
@@ -31,5 +30,12 @@ const schema = new Schema(
 //schema.virtual('fullName').get(function () {
 //  return this.name + ' ' + this.lastName
 //})
+
+// check if is unique
+schema.path('name').validate(async value => {
+  if (await mongoose.models.{{camelCase name}}.exists({ name: value })) {
+    throw new Error('ya existe')
+  }
+})
 
 export default mongoose.model('{{camelCase name}}', schema)

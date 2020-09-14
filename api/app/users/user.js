@@ -16,7 +16,6 @@ const schema = new Schema(
       trim: true,
       type: String,
       index: true,
-      unique: [true, 'El email debe ser unico'],
       required: [true, 'El email es requerido']
     },
     password: {
@@ -68,9 +67,15 @@ const schema = new Schema(
 
 // validations
 schema.path('email').validate(value => {
-  if (true) {
+  if (!email.test(value)) {
     throw new Error('Email no valido')
   }
-}, 'email no valido')
+})
+
+schema.path('email').validate(async value => {
+  if (await mongoose.models.user.exists({ email: value })) {
+    throw new Error('Email ya existe')
+  }
+})
 
 export default mongoose.model('user', schema)
