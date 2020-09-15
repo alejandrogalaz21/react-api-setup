@@ -1,3 +1,4 @@
+/* PLOP_INJECT_IMPORT */
 import Home from './../Home'
 import About from './../About'
 import Login from './../Login/Login'
@@ -6,6 +7,7 @@ import Users from './../User/Users'
 import FormExample from '../FormExample'
 
 export const routes = [
+  /* PLOP_INJECT_EXPORT */
   {
     path: '/',
     component: Login
