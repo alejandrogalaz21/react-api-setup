@@ -5,7 +5,7 @@ services:
     container_name: mongodb
     image: mongo:4.2
     ports:
-      - '27018:27017'
+      - 27018:27017
     volumes:
       - 'mongo:/data/db'
 
@@ -14,7 +14,7 @@ services:
     depends_on:
       - mongo
     image: mongo-express
-    restart: always
+    # restart: always
     ports:
       - 8081:8081
     environment:
@@ -29,13 +29,9 @@ services:
     build:
       dockerfile: Dockerfile.dev
       context: ./api
-    restart: always
+    # restart: always
     ports:
-      # <Port exposed> : < MySQL Port running inside container>
-      - '3005:3005'
-    expose:
-      # Opens port 3306 on the container
-      - '3005'
+      - 3005:3005
     volumes:
       - '/app/node_modules'
       - './api:/app'
@@ -49,18 +45,41 @@ services:
     build:
       context: ./client
       dockerfile: Dockerfile.dev
-    restart: always
+    # restart: always
     ports:
-      # <Port exposed> : < MySQL Port running inside container>
-      - '3000:3000'
-    expose:
-      # Opens port 3306 on the container
-      - '3000'
+      - 3000:3000
     volumes:
       - '/app/node_modules'
       - './client:/app'
     stdin_open: true
     tty: true
 
+  mysql:
+    image: mysql:5.7.28
+    container_name: dev_mysql
+    ports:
+      - 3306:3306
+    environment:
+      MYSQL_USER: user
+      MYSQL_PASSWORD: user
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: database
+    volumes:
+      - mysql_data:/var/lib/mysql
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: dev_pma
+    links:
+      - mysql
+    environment:
+      PMA_HOST: mysql
+      PMA_PORT: 3306
+      PMA_ARBITRARY: 1
+    restart: always
+    ports:
+      - 8183:80
+
 volumes:
   mongo:
+  mysql_data:
