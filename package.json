@@ -4,7 +4,8 @@
   "description": "full stack app",
   "main": "index.js",
   "scripts": {
-    "start": "plop"
+    "start": "plop",
+    "dev": "docker-compose -f docker-compose.dev.yml up --build -d"
   },
   "keywords": [
     "node",
@@ -15,10 +16,6 @@
   "author": "alejandro galaz",
   "license": "ISC",
   "dependencies": {
-    "@tinymce/tinymce-react": "^3.6.1",
-    "axios": "^0.20.0",
-    "plop": "^2.7.4",
-    "react-select": "^3.1.0",
-    "redux-form": "^8.3.6"
+    "plop": "^2.7.4"
   }
 }

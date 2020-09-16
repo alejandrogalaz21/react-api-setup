@@ -1,22 +1,23 @@
-import dotenv from 'dotenv'
+const dotenv = require('dotenv')
 dotenv.config()
 
-export const ENV = process.env.NODE_ENV || 'development'
-export const SECRET = process.env.SECRET || 'a211221684app'
-export const PORT = process.env.PORT || 5001
-export const EXPIRES_IN = process.env.EXPIRES_IN || '1 days'
-export const MONGO_DB = process.env.MONGO_DB || 'mongodb://localhost:27017/app'
-export const MAILER_HOST = process.env.MAILER_HOST || 'smtp.office365.com'
-export const MAILER_USER = process.env.MAILER_USER || 'probono@softtek.com'
-export const MAILER_PASS = process.env.MAILER_PASS
-export const MAILER_EMAIL = process.env.MAILER_EMAIL || 'probono@softtek.com'
-export const MAILER_PORT = process.env.MAILER_PORT || 587
+exports.ENV = process.env.NODE_ENV || 'development'
+exports.SECRET = process.env.SECRET || 'a211221684app'
+exports.PORT = process.env.PORT || 3005
+exports.EXPIRES_IN = process.env.EXPIRES_IN || '1 days'
+exports.MONGO_DB = process.env.MONGO_DB || 'mongodb://localhost:27017/app'
 
-export const MAILER = {
-  host: MAILER_HOST,
-  port: MAILER_PORT,
+exports.MYSQL = {
+  host: process.env.MYSQL_HOST || 'dev_mysql',
+  user: process.env.MYSQL_USER || 'root',
+  password: process.env.MYSQL_PASSWORD || 'root'
+}
+
+exports.MAILER = {
+  host: process.env.MAILER_HOST || 'smtp.office365.com',
+  port: process.env.MAILER_PORT || 587,
   auth: {
-    user: MAILER_USER,
-    pass: MAILER_PASS
+    user: process.env.MAILER_USER || 'probono@softtek.com',
+    pass: process.env.MAILER_PASS
   }
 }
