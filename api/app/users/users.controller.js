@@ -5,7 +5,6 @@ import bcrypt from 'bcryptjs'
 import { generatePassword } from '../auth/auth.helper'
 import { generateMailer } from '../../mailer'
 import { ENV } from '../../keys'
-import { connection } from '../../server/db/mysql.connection'
 
 export function usersController(Collection) {
   const router = new Router()
@@ -50,18 +49,10 @@ export function usersController(Collection) {
   async function readMany(req, res, next) {
     try {
       blue('users > controller > readMany')
-      connection.query('SELECT 1 + 1 AS solution', function (err, rows, fields) {
-        if (err) throw err
-        console.log('The solution is: ', rows[0].solution)
-        return res.json(rows)
-      })
-
-      /*
       const query = req.query || {}
       const result = await Collection.find(query).select('-password')
       green(result)
       return res.json(result)
-      */
     } catch (error) {
       next(error)
     }

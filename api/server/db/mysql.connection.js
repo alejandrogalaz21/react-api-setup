@@ -1,11 +1,9 @@
-import mysql from 'mysql'
+import { MYSQL } from '../../keys'
 
-const connection = mysql.createConnection({
-  host: 'dev_mysql',
-  user: 'root',
-  password: 'root'
+export const knex = require('knex')({
+  client: 'mysql',
+  connection: {
+    ...MYSQL,
+    database: 'database'
+  }
 })
-
-connection.connect()
-
-export { connection }
