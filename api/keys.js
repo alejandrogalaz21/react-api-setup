@@ -13,10 +13,10 @@ export const MAILER_EMAIL = process.env.MAILER_EMAIL || 'probono@softtek.com'
 export const MAILER_PORT = process.env.MAILER_PORT || 587
 
 export const MAILER = {
-	host: MAILER_HOST,
-	port: MAILER_PORT,
-	auth: {
-		user: MAILER_USER,
-		pass: MAILER_PASS
-	}
+  host: MAILER_HOST,
+  port: MAILER_PORT,
+  auth: {
+    user: MAILER_USER,
+    pass: MAILER_PASS
+  }
 }
