@@ -1,6 +1,6 @@
 import Email from 'email-templates'
 import path from 'path'
-import { MAILER, MAILER_EMAIL } from './../keys'
+import { MAILER } from './../keys'
 
 export const generateMailer = async () => {
   try {
@@ -12,7 +12,7 @@ export const generateMailer = async () => {
         root: templates
         // options: { extension: 'hbs' }
       },
-      message: { from: MAILER_EMAIL },
+      message: { from: MAILER.auth.user },
       preview: false,
       send: true,
       juice: true,
