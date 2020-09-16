@@ -73,7 +73,7 @@ const config = plop => {
         type: 'append',
         path: 'client/src/redux/sagas/index.js',
         pattern: `/* PLOP_INJECT_EXPORT */`,
-        template: `export { {{camelCase name}}s } from './../../components/{{pascalCase name}}/{{pascalCase name}}'`
+        template: `export { {{camelCase name}}sSagas } from './../../components/{{pascalCase name}}/{{camelCase name}}.saga'`
       },
       // Add Component
       {
@@ -89,7 +89,7 @@ const config = plop => {
         path: 'client/src/components/Router/routes.js',
         // Pattern tells plop where in the file to inject the template
         pattern: `/* PLOP_INJECT_IMPORT */`,
-        template: `import {{pascalCase name}} from './../{{pascalCase name}}/{{camelCase name}}.saga'`
+        template: `import {{pascalCase name}} from './../{{pascalCase name}}/{{camelCase name}}'`
       },
       {
         type: 'append',
