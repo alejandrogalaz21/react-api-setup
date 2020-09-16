@@ -14,7 +14,7 @@ services:
     depends_on:
       - mongo
     image: mongo-express
-    # restart: always
+    restart: always
     ports:
       - 8081:8081
     environment:
@@ -29,9 +29,11 @@ services:
     build:
       dockerfile: Dockerfile.dev
       context: ./api
-    # restart: always
+    restart: always
     ports:
       - 3005:3005
+    expose:
+      - 3005
     volumes:
       - '/app/node_modules'
       - './api:/app'
@@ -45,7 +47,7 @@ services:
     build:
       context: ./client
       dockerfile: Dockerfile.dev
-    # restart: always
+    restart: always
     ports:
       - 3000:3000
     volumes:
@@ -57,6 +59,7 @@ services:
   mysql:
     image: mysql:5.7.28
     container_name: dev_mysql
+    restart: always
     ports:
       - 3306:3306
     environment:

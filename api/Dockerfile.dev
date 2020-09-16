@@ -11,7 +11,5 @@ RUN npm install
 # Copies everything over to Docker environment
 COPY . .
 
-EXPOSE 3005
-
 # Finally runs the application
-CMD [ "npm", "start" ] 
+CMD [ "npm", "start" ]
