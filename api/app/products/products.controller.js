@@ -1,10 +1,9 @@
-import {{titleCase name}} from './{{camelCase name}}'
+import Product from './product'
 import { Router } from 'express'
 import { green, blue } from './../../helpers/chalk.helper'
 import { ErrorHandler } from '../../helpers/error.helper'
 
-
-export function {{camelCase name}}sController({{camelCase name}}) {
+export function productsController(product) {
   const router = new Router()
 
   // ======
@@ -21,20 +20,20 @@ export function {{camelCase name}}sController({{camelCase name}}) {
   // ======
   async function create(req, res, next) {
     try {
-      blue('{{camelCase name}}s > controller > create')
+      blue('products > controller > create')
       const newEntry = req.body
 
       //fields validations
       if (false) {
-        throw new ErrorHandler({status: 400, message: 'validation message' })
+        throw new ErrorHandler({ status: 400, message: 'validation message' })
       }
 
       // model validations
       if (false) {
-        throw new ErrorHandler({status: 400, message: 'validation message' })
+        throw new ErrorHandler({ status: 400, message: 'validation message' })
       }
 
-      const result = await {{camelCase name}}.create(newEntry)
+      const result = await product.create(newEntry)
       green(result)
       return res.send(result)
     } catch (error) {
@@ -47,9 +46,9 @@ export function {{camelCase name}}sController({{camelCase name}}) {
   // =========
   async function readMany(req, res, next) {
     try {
-      blue('{{camelCase name}}s > controller > readMany')
+      blue('products > controller > readMany')
       let query = req.query || {}
-      const result = await {{camelCase name}}.find(query).sort({updatedAt: -1})
+      const result = await product.find(query).sort({ updatedAt: -1 })
       green(result)
       return res.send(result)
     } catch (error) {
@@ -63,9 +62,9 @@ export function {{camelCase name}}sController({{camelCase name}}) {
 
   async function readOne(req, res, next) {
     try {
-      blue('{{camelCase name}}s > controller > readOne')
+      blue('products > controller > readOne')
       const { _id } = req.params
-      const result = await {{camelCase name}}.findById(_id)
+      const result = await product.findById(_id)
       green(result)
       return res.send(result)
     } catch (error) {
@@ -78,21 +77,21 @@ export function {{camelCase name}}sController({{camelCase name}}) {
   // ======
   async function update(req, res, next) {
     try {
-      blue('{{camelCase name}}s > controller > update')
-      
+      blue('products > controller > update')
+
       //fields validations
       if (false) {
-        throw new ErrorHandler({status: 400, message: 'validation message' })
+        throw new ErrorHandler({ status: 400, message: 'validation message' })
       }
 
       // model validations
       if (false) {
-        throw new ErrorHandler({status: 400, message: 'validation message' })
+        throw new ErrorHandler({ status: 400, message: 'validation message' })
       }
 
       const changedEntry = req.body
       const { _id } = req.params
-      const result = await {{camelCase name}}.update({ _id }, { $set: changedEntry })
+      const result = await product.update({ _id }, { $set: changedEntry })
       green(result)
       return res.send(result)
     } catch (error) {
@@ -105,20 +104,20 @@ export function {{camelCase name}}sController({{camelCase name}}) {
   // ======
   async function remove(req, res, next) {
     try {
-      blue('{{camelCase name}}s > controller > remove')
-     
-     //fields validations
+      blue('products > controller > remove')
+
+      //fields validations
       if (false) {
-        throw new ErrorHandler({status: 400, message: 'validation message' })
+        throw new ErrorHandler({ status: 400, message: 'validation message' })
       }
 
       // model validations
       if (false) {
-        throw new ErrorHandler({status: 400, message: 'validation message' })
+        throw new ErrorHandler({ status: 400, message: 'validation message' })
       }
 
       const { _id } = req.params
-      const result = await {{camelCase name}}.remove(_id)
+      const result = await product.remove(_id)
       green(result)
       return res.send(result)
     } catch (error) {
@@ -129,4 +128,4 @@ export function {{camelCase name}}sController({{camelCase name}}) {
   return router
 }
 
-export const {{camelCase name}}s = new Router().use('/{{camelCase name}}s', {{camelCase name}}sController({{titleCase name}}))
+export const products = new Router().use('/products', productsController(Product))
