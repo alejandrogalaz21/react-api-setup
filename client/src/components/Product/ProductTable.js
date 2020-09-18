@@ -5,22 +5,29 @@ import { productReadManyRequest, productEdit } from './product.redux'
 import moment from 'moment'
 
 export const ProductTable = ({ products, ...props }) => {
+  function formatDate(date) {
+    return moment(date).format('D/MM/YYYY, h:mm:ss a')
+  }
+
+  function isActive() {}
+
   useEffect(() => {
     props.readMany()
   }, [])
+
   const columns = [
     { dataField: 'name', text: 'Nombre', sort: true },
     {
       dataField: 'createdAt',
       text: 'Creado',
       sort: true,
-      formatter: (cell, row) => moment(cell).format('D/MM/YYYY, h:mm:ss a')
+      formatter: formatDate
     },
     {
       dataField: 'updatedAt',
       text: 'Actualizado',
       sort: true,
-      formatter: (cell, row) => moment(cell).format('D/MM/YYYY, h:mm:ss a')
+      formatter: formatDate
     }
   ]
 

@@ -17,22 +17,24 @@ export const ProductForm = ({ handleSubmit, pristine, submitting, reset, ...prop
   }
 
   return (
-    <Form onSubmit={handleSubmit(handleOnSubmit)} style={{ width: 400 }}>
-      <RFInput name='name' type='text' label='Nombre completo' />
+    <div className='row'>
+      <Form onSubmit={handleSubmit(handleOnSubmit)} style={{ width: 400 }}>
+        <RFInput name='name' type='text' label='Nombre completo' />
 
-      <div>
-        <button className='btn' type='submit' disabled={submitting}>
-          Enviar
-        </button>
-        <button
-          className='btn'
-          type='button'
-          disabled={pristine || submitting}
-          onClick={reset}>
-          Reestablecer valores
-        </button>
-      </div>
-    </Form>
+        <div>
+          <button className='btn' type='submit' disabled={submitting}>
+            Enviar
+          </button>
+          <button
+            className='btn'
+            type='button'
+            disabled={pristine || submitting}
+            onClick={reset}>
+            Reestablecer valores
+          </button>
+        </div>
+      </Form>
+    </div>
   )
 }
 
