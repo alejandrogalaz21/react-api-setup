@@ -1,23 +1,18 @@
-import Product from './product'
 import { Router } from 'express'
 import { green, blue } from './../../helpers/chalk.helper'
 import { ErrorHandler } from '../../helpers/error.helper'
+import { knex } from '../../server/db/mysql.connection'
+
 
 export function productsController(product) {
   const router = new Router()
 
-  // ======
-  // Routes
-  // ======
   router.post('/', create)
   router.get('/', readMany)
   router.get('/:_id', readOne)
   router.put('/:_id', update)
   router.delete('/:_id', remove)
 
-  // ======
-  // Create
-  // ======
   async function create(req, res, next) {
     try {
       blue('products > controller > create')
@@ -34,47 +29,40 @@ export function productsController(product) {
       }
 
       const result = await product.create(newEntry)
+      const [id] = await knex('products').insert(newEntry)
+      const [result] = await knex('products').where('id', '=', id)
       green(result)
-      return res.send(result)
+      return res.json(result)
     } catch (error) {
       next(error)
     }
   }
 
-  // =========
-  // Read many
-  // =========
   async function readMany(req, res, next) {
     try {
       blue('products > controller > readMany')
       let query = req.query || {}
       const result = await product.find(query).sort({ updatedAt: -1 })
+      const result = await knex('products').select('*')
       green(result)
-      return res.send(result)
+      return res.json(result)
     } catch (error) {
       next(error)
     }
   }
-
-  // ========
-  // Read one
-  // ========
 
   async function readOne(req, res, next) {
     try {
       blue('products > controller > readOne')
       const { _id } = req.params
-      const result = await product.findById(_id)
+      const [result] = await knex('products').where('id', '=', _id)
       green(result)
-      return res.send(result)
+      return res.json(result)
     } catch (error) {
       next(error)
     }
   }
 
-  // ======
-  // Update
-  // ======
   async function update(req, res, next) {
     try {
       blue('products > controller > update')
@@ -91,17 +79,15 @@ export function productsController(product) {
 
       const changedEntry = req.body
       const { _id } = req.params
-      const result = await product.update({ _id }, { $set: changedEntry })
+      await knex('products').where('id', '=', _id).update(changedEntry)
+      const [result] = await knex('products').where('id', '=', _id)
       green(result)
-      return res.send(result)
+      return res.json(result)
     } catch (error) {
       next(error)
     }
   }
 
-  // ======
-  // Remove
-  // ======
   async function remove(req, res, next) {
     try {
       blue('products > controller > remove')
@@ -117,9 +103,10 @@ export function productsController(product) {
       }
 
       const { _id } = req.params
-      const result = await product.remove(_id)
+      const confirmation = await knex('products').where('id', '=', _id).del()
+      const result = { id: _id, removed: new Boolean(confirmation) }
       green(result)
-      return res.send(result)
+      return res.json(result)
     } catch (error) {
       next(error)
     }
@@ -128,4 +115,4 @@ export function productsController(product) {
   return router
 }
 
-export const products = new Router().use('/products', productsController(Product))
+export const products = new Router().use('/products', productsController())

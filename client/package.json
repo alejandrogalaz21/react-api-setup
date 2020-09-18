@@ -26,6 +26,9 @@
     "react-bootstrap-table2-paginator": "^2.1.2",
     "react-bootstrap-table2-toolkit": "^2.1.2",
     "xlsx": "^0.16.0"
+    "@tinymce/tinymce-react": "^3.6.1",
+    "plop": "^2.7.4",
+    "react-select": "^3.1.0"
   },
   "scripts": {
     "start": "env REACT_APP_ENV=develop react-scripts start",
