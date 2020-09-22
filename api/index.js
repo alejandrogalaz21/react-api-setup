@@ -15,7 +15,7 @@ import { errorCentralHandler } from './server/middleware/errorHandler.middleware
 
 import { PORT, MONGO_DB } from './keys'
 import { apiRoutes } from './app/routes'
-import { mongooseConnection } from './server/db/mongoose.connection'
+import { mongooseConnection } from './server/db/mongodb/mongoose.connection'
 
 // Create express instance's
 const app = express()
