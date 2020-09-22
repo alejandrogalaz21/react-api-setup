@@ -1,13 +1,13 @@
 import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
 import DataTable from './../../components/Table/Table'
-import { {{camelCase name}}ReadManyRequest, {{camelCase name}}Edit } from './{{camelCase name}}.redux'
+import { productReadManyRequest, productEdit } from './product.redux'
 import moment from 'moment'
 
-export const {{pascalCase name}}Table = ({ {{camelCase name}}s, ...props }) => {
+export const ProductTable = ({ products, ...props }) => {
   function handleRowEvents() {
     return {
-      onClick: (e, r) => props.{{camelCase name}}Edit(r.id)
+      onClick: (e, r) => props.productEdit(r.id)
     }
   }
 
@@ -51,18 +51,18 @@ export const {{pascalCase name}}Table = ({ {{camelCase name}}s, ...props }) => {
     <div className='row'>
       <DataTable
         rowEvents={handleRowEvents()}
-        data={ {{camelCase name}}s }
+        data={ products }
         structure={columns}
-        tableName='{{camelCase name}}s'
+        tableName='products'
       />
     </div>
   )
 }
 
 const mapStateToProps = state => ({
-  {{camelCase name}}s: state.{{camelCase name}}s.many
+  products: state.products.many
 })
 
-const mapDispatchToProps = { readMany: {{camelCase name}}ReadManyRequest, {{camelCase name}}Edit }
+const mapDispatchToProps = { readMany: productReadManyRequest, productEdit }
 
-export default connect(mapStateToProps, mapDispatchToProps)({{pascalCase name}}Table)
+export default connect(mapStateToProps, mapDispatchToProps)(ProductTable)

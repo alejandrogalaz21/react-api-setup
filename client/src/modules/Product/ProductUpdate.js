@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
-import {{pascalCase name}} from './{{pascalCase name}}'
-import {{pascalCase name}}Form from './{{pascalCase name}}Form'
-import { {{camelCase name}}ReadOneRequest } from './{{camelCase name}}.redux'
+import Product from './Product'
+import ProductForm from './ProductForm'
+import { productReadOneRequest } from './product.redux'
 import { isEmpty } from './../../helpers'
 
-const {{pascalCase name}}Update = ({ product, ...props }) => {
+const ProductUpdate = ({ product, ...props }) => {
   useEffect(() => {
     if (isEmpty(product)) {
       const id = props.match.params.id
@@ -29,17 +29,17 @@ const {{pascalCase name}}Update = ({ product, ...props }) => {
           </li>
         </ul>
       </div>
-      {showForm ? <{{pascalCase name}}Form /> : <{{pascalCase name}} />}
+      {showForm ? <ProductForm /> : <Product />}
     </div>
   )
 }
 
 const mapStateToProps = state => ({
-  product: state.{{camelCase name}}s.one
+  product: state.products.one
 })
 
 const mapDispatchToProps = {
-  readOne: {{camelCase name}}ReadOneRequest
+  readOne: productReadOneRequest
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)({{pascalCase name}}Update)
+export default connect(mapStateToProps, mapDispatchToProps)(ProductUpdate)

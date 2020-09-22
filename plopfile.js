@@ -130,7 +130,7 @@ const config = plop => {
         type: 'append',
         path: 'client/src/router/routes.js',
         pattern: `/* PLOP_INJECT_EXPORT */`,
-        template: `\t{ path: '/{{camelCase name}}s', component: {{pascalCase name}}s },
+        template: `\n\t{ path: '/{{camelCase name}}s', component: {{pascalCase name}}s },
         \n\t{ path: '/{{camelCase name}}s/:id', component: {{pascalCase name}} },
         \n\t{ path: '/{{camelCase name}}s/update/:id', component: {{pascalCase name}}Update },`
       }
