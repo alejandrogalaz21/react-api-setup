@@ -1,0 +1,71 @@
+import axios from 'axios'
+import { push } from 'connected-react-router'
+import { call, put, take, all, takeLatest } from 'redux-saga/effects'
+
+import {
+  {{constantCase name}}_CREATE_REQUEST,
+  {{constantCase name}}_READ_MANY_REQUEST,
+  {{constantCase name}}_READ_ONE_REQUEST,
+  {{constantCase name}}_UPDATE_REQUEST,
+  {{camelCase name}}CreateSuccess,
+  {{camelCase name}}CreateFailure,
+  {{camelCase name}}ReadManySuccess,
+  {{camelCase name}}ReadManyFailure,
+  {{camelCase name}}ReadOneSuccess,
+  {{camelCase name}}ReadOneFailure,
+  {{camelCase name}}UpdateSuccess,
+  {{camelCase name}}UpdateFailure
+} from './{{camelCase name}}.redux'
+
+export function* {{camelCase name}}Create({ payload }) {
+  try {
+    // POST REQUEST
+    const { data } = yield call(axios.post, '/api/{{camelCase name}}s', payload)
+    yield put({{camelCase name}}CreateSuccess(data))
+    yield alert('registro guardado')
+  } catch (error) {
+    console.log(error)
+    yield put({{camelCase name}}CreateFailure('Fail {{camelCase name}}s create request'))
+  }
+}
+
+export function* {{camelCase name}}ReadMany() {
+  try {
+    // GET REQUEST
+    const { data } = yield call(axios.get, '/api/{{camelCase name}}s')
+    yield put({{camelCase name}}ReadManySuccess(data))
+  } catch (error) {
+    yield put({{camelCase name}}ReadManyFailure('Fail {{camelCase name}}s read many request'))
+  }
+}
+
+export function* {{camelCase name}}ReadOne({ payload }) {
+  try {
+    // GET REQUEST
+    const { data } = yield call(axios.get, `/api/{{camelCase name}}s/${payload}`)
+    yield put({{camelCase name}}ReadOneSuccess(data))
+  } catch (error) {
+    yield put({{camelCase name}}ReadOneFailure('Fail {{camelCase name}}s read one request'))
+  }
+}
+
+export function* {{camelCase name}}Update({ payload }) {
+  try {
+    // POST REQUEST
+    yield call(axios.put, `/api/{{camelCase name}}s/${payload.id}`, payload)
+    yield put({{camelCase name}}UpdateSuccess(payload))
+    yield alert('Registro actualizado')
+  } catch (error) {
+    console.log(error)
+    yield put({{camelCase name}}UpdateFailure('Fail {{camelCase name}}s update request'))
+  }
+}
+
+export function* {{camelCase name}}sSagas() {
+  yield all([
+    takeLatest({{constantCase name}}_CREATE_REQUEST, {{camelCase name}}Create),
+    takeLatest({{constantCase name}}_READ_MANY_REQUEST, {{camelCase name}}ReadMany),
+    takeLatest({{constantCase name}}_READ_ONE_REQUEST, {{camelCase name}}ReadOne),
+    takeLatest({{constantCase name}}_UPDATE_REQUEST, {{camelCase name}}Update)
+  ])
+}

@@ -49,7 +49,7 @@ export function {{camelCase name}}sController({{camelCase name}}) {
     try {
       blue('{{camelCase name}}s > controller > readMany')
       let query = req.query || {}
-      const result = await {{camelCase name}}.find(query)
+      const result = await {{camelCase name}}.find(query).sort({updatedAt: -1})
       green(result)
       return res.send(result)
     } catch (error) {
