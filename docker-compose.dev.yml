@@ -43,6 +43,8 @@ services:
       MONGO_DB: 'mongodb://mongo/app'
 
   client:
+    depends_on:
+      - api
     container_name: client
     build:
       context: ./client
@@ -82,6 +84,19 @@ services:
     restart: always
     ports:
       - 8183:80
+
+
+  # jsreport:
+  #   container_name: jsreport
+  #   build:
+  #     dockerfile: Dockerfile
+  #     context: ./api-reports
+  #   ports:
+  #     - 5488:5488
+  #   volumes:
+  #     - '/app/node_modules'
+  #     - './api-reports:/app'
+  #   restart: always
 
 volumes:
   mongo:
