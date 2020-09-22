@@ -124,7 +124,7 @@ const config = plop => {
         path: 'client/src/router/routes.js',
         // Pattern tells plop where in the file to inject the template
         pattern: `/* PLOP_INJECT_IMPORT */`,
-        template: `import { {{pascalCase name}}, {{pascalCase name}}s, {{pascalCase name}}Update } from './modules/{{pascalCase name}}'`
+        template: `import { {{pascalCase name}}, {{pascalCase name}}s, {{pascalCase name}}Update } from './../modules/{{pascalCase name}}'`
       },
       {
         type: 'append',

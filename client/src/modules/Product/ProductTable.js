@@ -5,6 +5,12 @@ import { productReadManyRequest, productEdit } from './product.redux'
 import moment from 'moment'
 
 export const ProductTable = ({ products, ...props }) => {
+  function handleRowEvents() {
+    return {
+      onClick: (e, r) => props.productEdit(r.id)
+    }
+  }
+
   function formatDate(date) {
     return moment(date).format('D/MM/YYYY, h:mm:ss a')
   }
@@ -44,9 +50,7 @@ export const ProductTable = ({ products, ...props }) => {
   return (
     <div className='row'>
       <DataTable
-        rowEvents={{
-          onClick: (e, r) => props.productEdit(r.id)
-        }}
+        rowEvents={handleRowEvents}
         data={products}
         structure={columns}
         tableName='Products'

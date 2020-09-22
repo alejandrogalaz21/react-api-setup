@@ -1,9 +1,9 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { reduxForm, Form } from 'redux-form'
-import { RFInput } from './../Inputs/RFFields'
+import { RFInput } from './../../components/Inputs/RFFields'
 import { {{camelCase name}}CreateRequest, {{camelCase name}}UpdateRequest } from './{{camelCase name}}.redux'
-import { isEmpty } from './../helpers'
+import { isEmpty } from './../../helpers'
 
 export const {{pascalCase name}}Form = ({ handleSubmit, pristine, submitting, reset, ...props }) => {
   function handleOnSubmit(values) {
@@ -18,7 +18,7 @@ export const {{pascalCase name}}Form = ({ handleSubmit, pristine, submitting, re
 
   return (
     <div className='row'>
-      <Form onSubmit={handleSubmit(handleOnSubmit)} style={{ width: 400 }}>
+      <Form onSubmit={handleSubmit(handleOnSubmit)}>
         <RFInput name='name' type='text' label='Nombre' />
 
         <div>

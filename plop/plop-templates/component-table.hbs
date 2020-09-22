@@ -1,10 +1,16 @@
 import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
-import DataTable from './../Table/Table'
+import DataTable from './../../components/Table/Table'
 import { {{camelCase name}}ReadManyRequest, {{camelCase name}}Edit } from './{{camelCase name}}.redux'
 import moment from 'moment'
 
 export const {{pascalCase name}}Table = ({ {{camelCase name}}s, ...props }) => {
+  function handleRowEvents() {
+    return {
+      onClick: (e, r) => props.{{camelCase name}}Edit(r.id)
+    }
+  }
+
   function formatDate(date) {
     return moment(date).format('D/MM/YYYY, h:mm:ss a')
   }
@@ -44,10 +50,8 @@ export const {{pascalCase name}}Table = ({ {{camelCase name}}s, ...props }) => {
   return (
     <div className='row'>
       <DataTable
-        rowEvents={{
-          onClick: (e, r) => props.{{camelCase name}}Edit(r.id)
-        }}
-        data={{{camelCase name}}s}
+        rowEvents={handleRowEvents}
+        data={ {{camelCase name}}s }
         structure={columns}
         tableName='{{camelCase name}}s'
       />
