@@ -31,15 +31,15 @@ services:
       context: ./api
     restart: always
     ports:
-      - 3005:3005
+      - 5001:5001
     expose:
-      - 3005
+      - 5001
     volumes:
       - '/app/node_modules'
       - './api:/app'
     environment:
       SECRET: a211221684
-      PORT: 3005
+      PORT: 5001
       MONGO_DB: 'mongodb://mongo/app'
 
   client:
