@@ -4,12 +4,13 @@ FROM node:alpine
 WORKDIR '/app'
 
 # Copy only package.json and yarn.lock for cache
-COPY package*.json ./
-# Install some depenendencies
-RUN npm install
+COPY package.json yarn.lock ./
+
+# Install api project dependencies
+RUN yarn --pure-lockfile
 
 # Copies everything over to Docker environment
 COPY . .
 
 # Finally runs the application
-CMD [ "npm", "start" ]
+CMD [ "yarn", "start" ]
