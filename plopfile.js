@@ -128,11 +128,9 @@ const config = plop => {
       },
       {
         type: 'append',
-        path: 'client/src/modules/Router/routes.js',
+        path: 'client/src/router/routes.js',
         pattern: `/* PLOP_INJECT_EXPORT */`,
-        template: `\t{ path: '/{{camelCase name}}s', component: {{pascalCase name}}s },
-        \t{ path: '/{{camelCase name}}s/:id', component: {{pascalCase name}} },
-        \t{ path: '/{{camelCase name}}s/update/:id', component: {{pascalCase name}}Update },`
+        template: `\t{ path: '/{{camelCase name}}s', component: {{pascalCase name}}s },\t{ path: '/{{camelCase name}}s/:id', component: {{pascalCase name}} },\t{ path: '/{{camelCase name}}s/update/:id', component: {{pascalCase name}}Update },`
       }
     ]
   })

@@ -13,6 +13,7 @@ export const router = connectRouter(createBrowserHistory())
 
 export default combineReducers({
   /* PLOP_INJECT_EXPORT */
+  items,
   products,
   router,
   form,
