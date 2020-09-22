@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import Product from './Product'
 import ProductForm from './ProductForm'
 import { productReadOneRequest } from './product.redux'
-import { isEmpty } from './../../helpers'
+import { isEmpty } from '../../helpers'
 
 const ProductUpdate = ({ product, ...props }) => {
   useEffect(() => {

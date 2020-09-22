@@ -1,14 +1,12 @@
 /* PLOP_INJECT_IMPORT */
-import Products from './../Product/Products'
-import Product from './../Product/Product'
-import ProductUpdate from './../Product/ProductUpdate'
+import { Product, Products, ProductUpdate } from './../modules/Product'
 
-import Home from './../Home'
-import About from './../About'
-import Login from './../Login/Login'
-import Dashboard from './../Dashboard/Dashboard'
-import Users from './../User/Users'
-import FormExample from '../FormExample'
+import Home from './../components/Home'
+import About from './../components/About'
+import Login from './../components/Login/Login'
+import Dashboard from './../components/Dashboard/Dashboard'
+import Users from './../components/User/Users'
+import FormExample from './../components/FormExample'
 
 export const routes = [
   /* PLOP_INJECT_EXPORT */

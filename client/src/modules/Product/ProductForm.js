@@ -1,9 +1,9 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { reduxForm, Form } from 'redux-form'
-import { RFInput } from './../Inputs/RFFields'
+import { RFInput } from '../../components/Inputs/RFFields'
 import { productCreateRequest, productUpdateRequest } from './product.redux'
-import { isEmpty } from './../../helpers'
+import { isEmpty } from '../../helpers'
 
 export const ProductForm = ({ handleSubmit, pristine, submitting, reset, ...props }) => {
   function handleOnSubmit(values) {
@@ -17,18 +17,24 @@ export const ProductForm = ({ handleSubmit, pristine, submitting, reset, ...prop
   }
 
   return (
-    <Form onSubmit={handleSubmit(handleOnSubmit)} style={{ width: 400 }}>
-      <RFInput name='name' type='text' label='Nombre completo' />
+    <div className='row'>
+      <Form onSubmit={handleSubmit(handleOnSubmit)} style={{ width: 400 }}>
+        <RFInput name='name' type='text' label='Nombre completo' />
 
-      <div>
-        <button type='submit' disabled={submitting}>
-          Enviar
-        </button>
-        <button type='button' disabled={pristine || submitting} onClick={reset}>
-          Reestablecer valores
-        </button>
-      </div>
-    </Form>
+        <div>
+          <button className='btn' type='submit' disabled={submitting}>
+            Enviar
+          </button>
+          <button
+            className='btn'
+            type='button'
+            disabled={pristine || submitting}
+            onClick={reset}>
+            Reestablecer valores
+          </button>
+        </div>
+      </Form>
+    </div>
   )
 }
 

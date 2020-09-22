@@ -42,7 +42,7 @@ const config = plop => {
       // Add Redux
       {
         type: 'add',
-        path: 'client/src/components/{{pascalCase name}}/{{camelCase name}}.redux.js',
+        path: 'client/src/modules/{{pascalCase name}}/{{camelCase name}}.redux.js',
         templateFile: 'plop/plop-templates/redux.hbs',
         skipIfExists: true
       },
@@ -64,7 +64,7 @@ const config = plop => {
       // Add Saga
       {
         type: 'add',
-        path: 'client/src/components/{{pascalCase name}}/{{camelCase name}}.saga.js',
+        path: 'client/src/modules/{{pascalCase name}}/{{camelCase name}}.saga.js',
         templateFile: 'plop/plop-templates/saga.hbs',
         skipIfExists: true
       },
@@ -75,27 +75,64 @@ const config = plop => {
         pattern: `/* PLOP_INJECT_EXPORT */`,
         template: `export { {{camelCase name}}sSagas } from './../../components/{{pascalCase name}}/{{camelCase name}}.saga'`
       },
+      // Add Component Table
+      {
+        type: 'add',
+        path: 'client/src/modules/{{pascalCase name}}/{{pascalCase name}}Table.js',
+        templateFile: 'plop/plop-templates/component-table.hbs',
+        skipIfExists: true
+      },
+      // Add Form Component
+      {
+        type: 'add',
+        path: 'client/src/modules/{{pascalCase name}}/{{pascalCase name}}Form.js',
+        templateFile: 'plop/plop-templates/form-component.hbs',
+        skipIfExists: true
+      },
       // Add Component
       {
         type: 'add',
-        path: 'client/src/components/{{pascalCase name}}/{{pascalCase name}}.js',
+        path: 'client/src/modules/{{pascalCase name}}/{{pascalCase name}}.js',
         templateFile: 'plop/plop-templates/component.hbs',
+        skipIfExists: true
+      },
+      // Add Component's
+      {
+        type: 'add',
+        path: 'client/src/modules/{{pascalCase name}}/{{pascalCase name}}s.js',
+        templateFile: 'plop/plop-templates/components.hbs',
+        skipIfExists: true
+      },
+      // Add Component Update
+      {
+        type: 'add',
+        path: 'client/src/modules/{{pascalCase name}}/{{pascalCase name}}Update.js',
+        templateFile: 'plop/plop-templates/components.hbs',
+        skipIfExists: true
+      },
+      // Add Module Component's
+      {
+        type: 'add',
+        path: 'client/src/modules/{{pascalCase name}}/index.js',
+        templateFile: 'plop/plop-templates/react-module.hbs',
         skipIfExists: true
       },
       // Append Components Router
       {
         // Action type 'append' injects a template into an existing file
         type: 'append',
-        path: 'client/src/components/Router/routes.js',
+        path: 'client/src/router/routes.js',
         // Pattern tells plop where in the file to inject the template
         pattern: `/* PLOP_INJECT_IMPORT */`,
-        template: `import {{pascalCase name}} from './../{{pascalCase name}}/{{camelCase name}}'`
+        template: `import { {{pascalCase name}}, {{pascalCase name}}s, {{pascalCase name}}Update } from './modules/{{pascalCase name}}'`
       },
       {
         type: 'append',
-        path: 'client/src/components/Router/routes.js',
+        path: 'client/src/modules/Router/routes.js',
         pattern: `/* PLOP_INJECT_EXPORT */`,
-        template: `\t{ path: '/{{camelCase name}}s', component: {{pascalCase name}} },`
+        template: `\t{ path: '/{{camelCase name}}s', component: {{pascalCase name}}s },
+        \t{ path: '/{{camelCase name}}s/:id', component: {{pascalCase name}} },
+        \t{ path: '/{{camelCase name}}s/update/:id', component: {{pascalCase name}}Update },`
       }
     ]
   })

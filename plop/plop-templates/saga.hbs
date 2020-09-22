@@ -7,6 +7,7 @@ import {
   {{constantCase name}}_READ_MANY_REQUEST,
   {{constantCase name}}_READ_ONE_REQUEST,
   {{constantCase name}}_UPDATE_REQUEST,
+  {{constantCase name}}_EDIT,
   {{camelCase name}}CreateSuccess,
   {{camelCase name}}CreateFailure,
   {{camelCase name}}ReadManySuccess,
@@ -39,10 +40,10 @@ export function* {{camelCase name}}ReadMany() {
   }
 }
 
-export function* {{camelCase name}}ReadOne({ payload }) {
+export function* {{camelCase name}}ReadOne({ id }) {
   try {
     // GET REQUEST
-    const { data } = yield call(axios.get, `/api/{{camelCase name}}s/${payload}`)
+    const { data } = yield call(axios.get, `/api/{{camelCase name}}s/${id}`)
     yield put({{camelCase name}}ReadOneSuccess(data))
   } catch (error) {
     yield put({{camelCase name}}ReadOneFailure('Fail {{camelCase name}}s read one request'))
@@ -61,11 +62,19 @@ export function* {{camelCase name}}Update({ payload }) {
   }
 }
 
+export function* {{camelCase name}}Edit({ id }) {
+  // Dispatch get request
+  yield put({{camelCase name}}ReadOneRequest(id))
+  // Router component
+  yield put(push(`/{{camelCase name}}s/update/${id}`))
+}
+
 export function* {{camelCase name}}sSagas() {
   yield all([
     takeLatest({{constantCase name}}_CREATE_REQUEST, {{camelCase name}}Create),
     takeLatest({{constantCase name}}_READ_MANY_REQUEST, {{camelCase name}}ReadMany),
     takeLatest({{constantCase name}}_READ_ONE_REQUEST, {{camelCase name}}ReadOne),
-    takeLatest({{constantCase name}}_UPDATE_REQUEST, {{camelCase name}}Update)
+    takeLatest({{constantCase name}}_UPDATE_REQUEST, {{camelCase name}}Update),
+    takeLatest({{constantCase name}}_EDIT, {{camelCase name}}Edit)
   ])
 }

@@ -41,10 +41,10 @@ export function* productReadMany() {
   }
 }
 
-export function* productReadOne({ payload }) {
+export function* productReadOne({ id }) {
   try {
     // GET REQUEST
-    const { data } = yield call(axios.get, `/api/products/${payload}`)
+    const { data } = yield call(axios.get, `/api/products/${id}`)
     yield put(productReadOneSuccess(data))
   } catch (error) {
     yield put(productReadOneFailure('Fail products read one request'))

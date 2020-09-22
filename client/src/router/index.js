@@ -4,9 +4,9 @@ import { Switch, Route, Redirect } from 'react-router-dom'
 import { routes } from './routes'
 
 import { ConnectedRouter } from 'connected-react-router'
-import { history } from './../../redux/configureStore'
+import { history } from './../redux/configureStore'
 
-function Router({ user, props }) {
+function Router({ user, ...props }) {
   return (
     <ConnectedRouter history={history}>
       <Switch>
