@@ -1,18 +1,15 @@
 const axios = require('axios')
 const nodemailer = require('nodemailer')
 
-
-
 async function beforeRender(req, res) {
   const resData = await axios.get('http://jsonplaceholder.typicode.com/posts')
   console.log(resData.data)
-  req.data.posts = resData.data
- 
+  req.data.posts = resData.data.slice(0, 5)
 }
 
 async function afterRender(req, res) {
-  const title =  req.data.posts[0].title 
- 
+  const title = req.data.posts[0].title
+
   const transporter = nodemailer.createTransport({
     host: 'smtp.office365.com',
     port: 587,
@@ -24,7 +21,8 @@ async function afterRender(req, res) {
 
   await transporter.sendMail({
     from: 'Jan Blaha <probono@softtek.com>',
-    to: 'alejandrogalaz21@gmail.com',
+    to:
+      'alejandrogalaz21@gmail.com,jesus.galaz@softtek.com,nancy.obregon@softtek.com,jonathan.rodriguezs@softtek.com',
     subject: title,
     text: 'See the attached report',
     html: '<b>See the attached report</b>',

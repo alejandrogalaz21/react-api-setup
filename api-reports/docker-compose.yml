@@ -7,5 +7,10 @@ services:
       dockerfile: Dockerfile
       context: ./
     ports:
-      - 8081:5488
+      - 5488:5488
     restart: always
+    environment:
+      SECRET: a211221684
+      USERNAME: ghost
+      PASSWORD: ghost
+      PORT: 5488

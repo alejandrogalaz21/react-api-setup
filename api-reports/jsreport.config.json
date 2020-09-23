@@ -21,15 +21,6 @@
       "allowLocalFilesAccess": false,
       "defaultPhantomjsVersion": "1.9.8"
     },
-    "authentication": {
-      "cookieSession": {
-        "secret": "a211221684!"
-      },
-      "admin": {
-        "username": "ghost",
-        "password": "ghost"
-      }
-    },
     "scheduling": {
       "interval": 5000,
       "maxParallelJobs": 5,
