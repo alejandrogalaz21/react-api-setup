@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { reduxForm, Form } from 'redux-form'
-import { RFInput } from './../../components/Inputs/RFFields'
+import { RFInput, RFSelect } from './../../components/Inputs/RFFields'
 import { productCreateRequest, productUpdateRequest } from './product.redux'
 import { isEmpty } from './../../helpers'
 
@@ -20,6 +20,19 @@ export const ProductForm = ({ handleSubmit, pristine, submitting, reset, ...prop
     <div className='row'>
       <Form onSubmit={handleSubmit(handleOnSubmit)}>
         <RFInput name='name' type='text' label='Nombre' />
+
+        {!isEmpty(props.initialValues) && (
+          <RFSelect
+            name='isActive'
+            label='Estatus'
+            options={[
+              { value: true, label: 'activo' },
+              { value: false, label: 'inactivo' }
+            ]}
+          />
+        )}
+
+        <br />
 
         <div>
           <button className='btn' type='submit' disabled={submitting}>

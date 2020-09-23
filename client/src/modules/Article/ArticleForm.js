@@ -2,10 +2,10 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { reduxForm, Form } from 'redux-form'
 import { RFInput, RFSelect } from './../../components/Inputs/RFFields'
-import { {{camelCase name}}CreateRequest, {{camelCase name}}UpdateRequest } from './{{camelCase name}}.redux'
+import { articleCreateRequest, articleUpdateRequest } from './article.redux'
 import { isEmpty } from './../../helpers'
 
-export const {{pascalCase name}}Form = ({ handleSubmit, pristine, submitting, reset, ...props }) => {
+export const ArticleForm = ({ handleSubmit, pristine, submitting, reset, ...props }) => {
   function handleOnSubmit(values) {
     if (!isEmpty(props.initialValues)) {
       console.log('Update values')
@@ -52,13 +52,13 @@ export const {{pascalCase name}}Form = ({ handleSubmit, pristine, submitting, re
 }
 
 const mapStateToProps = state => ({
-  initialValues: state.{{camelCase name}}s.one
+  initialValues: state.articles.one
 })
 
 const mapDispatchToProps = {
-  create: {{camelCase name}}CreateRequest,
-  update: {{camelCase name}}UpdateRequest
+  create: articleCreateRequest,
+  update: articleUpdateRequest
 }
 
-const RForm = reduxForm({ form: '{{camelCase name}}', enableReinitialize: true })({{pascalCase name}}Form)
+const RForm = reduxForm({ form: 'article', enableReinitialize: true })(ArticleForm)
 export default connect(mapStateToProps, mapDispatchToProps)(RForm)

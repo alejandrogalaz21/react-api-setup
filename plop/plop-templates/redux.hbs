@@ -59,7 +59,7 @@ const INITIAL_STATE = {
 export function {{camelCase name}}s(state = INITIAL_STATE, action) {
   switch (action.type) {
     case {{constantCase name}}_CREATE_SUCCESS:
-      return { ...state, many: [...state.many, action.payload] }
+      return { ...state, many: [...state.many, action.payload], one: {} }
     case {{constantCase name}}_READ_MANY_SUCCESS:
       return { ...state, many: [...action.payload] }
     case {{constantCase name}}_READ_ONE_SUCCESS:
@@ -67,7 +67,8 @@ export function {{camelCase name}}s(state = INITIAL_STATE, action) {
     case {{constantCase name}}_UPDATE_SUCCESS:
       return {
         ...state,
-        many: [...state.many.filter(s => s.id !== action.payload.id), action.payload]
+        many: [...state.many.filter(s => s.id !== action.payload.id), action.payload],
+        one: {}
       }
     case {{constantCase name}}_REMOVE_SUCCESS:
       return { ...state, many: [...state.many.filter(s => s.id !== action.payload.id)] }

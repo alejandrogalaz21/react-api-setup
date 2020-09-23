@@ -59,7 +59,7 @@ const INITIAL_STATE = {
 export function products(state = INITIAL_STATE, action) {
   switch (action.type) {
     case PRODUCT_CREATE_SUCCESS:
-      return { ...state, many: [...state.many, action.payload] }
+      return { ...state, many: [...state.many, action.payload], one: {} }
     case PRODUCT_READ_MANY_SUCCESS:
       return { ...state, many: [...action.payload] }
     case PRODUCT_READ_ONE_SUCCESS:
@@ -67,7 +67,8 @@ export function products(state = INITIAL_STATE, action) {
     case PRODUCT_UPDATE_SUCCESS:
       return {
         ...state,
-        many: [...state.many.filter(s => s.id !== action.payload.id), action.payload]
+        many: [...state.many.filter(s => s.id !== action.payload.id), action.payload],
+        one: {}
       }
     case PRODUCT_REMOVE_SUCCESS:
       return { ...state, many: [...state.many.filter(s => s.id !== action.payload.id)] }

@@ -25,6 +25,7 @@ export function* {{camelCase name}}Create({ payload }) {
     const { data } = yield call(axios.post, '/api/{{camelCase name}}s', payload)
     yield put({{camelCase name}}CreateSuccess(data))
     yield alert('registro guardado')
+    yield put(push('/{{camelCase name}}s'))
   } catch (error) {
     console.log(error)
     yield put({{camelCase name}}CreateFailure('Fail {{camelCase name}}s create request'))
@@ -57,6 +58,7 @@ export function* {{camelCase name}}Update({ payload }) {
     yield call(axios.put, `/api/{{camelCase name}}s/${payload.id}`, payload)
     yield put({{camelCase name}}UpdateSuccess(payload))
     yield alert('Registro actualizado')
+    yield put(push('/{{camelCase name}}s'))
   } catch (error) {
     console.log(error)
     yield put({{camelCase name}}UpdateFailure('Fail {{camelCase name}}s update request'))
