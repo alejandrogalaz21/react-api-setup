@@ -5,7 +5,8 @@ import { createBrowserHistory } from 'history'
 import { connectRouter } from 'connected-react-router'
 // custom reducer's
 /* PLOP_INJECT_IMPORT */
-import { products } from './../../components/Product/product.redux'
+import { articles } from './../../modules/Article/article.redux'
+import { products } from './../../modules/Product/product.redux'
 import { app } from './app.reducer'
 import { user } from './../../components/User/user.redux'
 
@@ -13,7 +14,8 @@ export const router = connectRouter(createBrowserHistory())
 
 export default combineReducers({
   /* PLOP_INJECT_EXPORT */
-	products,
+	articles,
+  products,
   router,
   form,
   app,

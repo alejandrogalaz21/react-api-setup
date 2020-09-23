@@ -1,2 +1,3 @@
 /* PLOP_INJECT_EXPORT */
-export { productsSagas } from './../../components/Product/product.saga'
+export { articlesSagas } from './../../modules/Article/article.saga'
+export { productsSagas } from './../../modules/Product/product.saga'

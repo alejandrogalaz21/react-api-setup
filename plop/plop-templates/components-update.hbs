@@ -1,0 +1,45 @@
+import React, { useEffect, useState } from 'react'
+import { connect } from 'react-redux'
+import {{pascalCase name}} from './{{pascalCase name}}'
+import {{pascalCase name}}Form from './{{pascalCase name}}Form'
+import { {{camelCase name}}ReadOneRequest } from './{{camelCase name}}.redux'
+import { isEmpty } from './../../helpers'
+
+const {{pascalCase name}}Update = ({ product, ...props }) => {
+  useEffect(() => {
+    if (isEmpty(product)) {
+      const id = props.match.params.id
+      props.readOne(id)
+    }
+  }, [])
+
+  const [showForm, setShowForm] = useState(false)
+
+  return (
+    <div className='container'>
+      <div className='row'>
+        <ul className='list-inline'>
+          <li className='list-inline-item'>
+            <button className='btn' onClick={() => setShowForm(!showForm)}>
+              {showForm ? 'Detail' : 'Update'}
+            </button>
+          </li>
+          <li className='list-inline-item'>
+            <button className='btn'>Delete</button>
+          </li>
+        </ul>
+      </div>
+      {showForm ? <{{pascalCase name}}Form /> : <{{pascalCase name}} />}
+    </div>
+  )
+}
+
+const mapStateToProps = state => ({
+  product: state.{{camelCase name}}s.one
+})
+
+const mapDispatchToProps = {
+  readOne: {{camelCase name}}ReadOneRequest
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)({{pascalCase name}}Update)

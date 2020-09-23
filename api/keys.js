@@ -3,7 +3,7 @@ dotenv.config()
 
 exports.ENV = process.env.NODE_ENV || 'development'
 exports.SECRET = process.env.SECRET || 'a211221684app'
-exports.PORT = process.env.PORT || 3005
+exports.PORT = process.env.PORT || 5001
 exports.EXPIRES_IN = process.env.EXPIRES_IN || '1 days'
 exports.MONGO_DB = process.env.MONGO_DB || 'mongodb://localhost:27017/app'
 

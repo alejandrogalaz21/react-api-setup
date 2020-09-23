@@ -28,11 +28,11 @@ the controller has to be in plural
 
 ## Todos
 
-- [ ] mongodb Dockerfile.dev
+- [x] mongodb Dockerfile.dev
 - [ ] crear carpeta modules
 - [ ] Crear gifs para la documentacion
 - [ ] checar ttystudio
-- [ ] export routes like the sagas files
+- [x] export routes like the sagas files / no aplica
 
 ## MYSQL
 

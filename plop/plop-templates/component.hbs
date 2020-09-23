@@ -1,18 +1,18 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
-const {{pascalCase name}} = ({ {{camelCase name}}s, ...props }) => {
+const {{pascalCase name}} = ({ {{camelCase name}}, ...props }) => {
   return (
-    <div className='row'>
-        <pre>{JSON.stringify({{camelCase name}}s, ' ', 2)}</pre>
+    <div className='container'>
+      <div className='row'>
+        <pre>{JSON.stringify({{camelCase name}}, ' ', 2)}</pre>
+      </div>
     </div>
   )
 }
 
 const mapStateToProps = state => ({
-  {{camelCase name}}s: state.{{camelCase name}}s
+  {{camelCase name}}: state.{{camelCase name}}s.one
 })
-
 const mapDispatchToProps = {}
-
 export default connect(mapStateToProps, mapDispatchToProps)({{pascalCase name}})
