@@ -2,9 +2,23 @@ import React, { useState } from 'react'
 import { connect } from 'react-redux'
 import ProductForm from './ProductForm'
 import ProductTable from './ProductTable'
+import axios from 'axios'
 
 const Products = props => {
   const [showForm, setShowForm] = useState(false)
+
+  function handleClickJsReport() {
+    axios
+      .post('/jsreport', {})
+      .then(data => {
+        debugger
+        console.log(data)
+      })
+      .catch(error => {
+        debugger
+        console.log(error)
+      })
+  }
 
   return (
     <div className='container'>
@@ -14,6 +28,7 @@ const Products = props => {
             <button className='btn' onClick={() => setShowForm(!showForm)}>
               {showForm ? 'Table' : 'Add +'}
             </button>
+            <button onClick={handleClickJsReport}>JS Report</button>
           </li>
         </ul>
       </div>
