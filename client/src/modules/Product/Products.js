@@ -2,26 +2,10 @@ import React, { useState } from 'react'
 import { connect } from 'react-redux'
 import ProductForm from './ProductForm'
 import ProductTable from './ProductTable'
-import axios from 'axios'
+import { getReport } from './../../redux/global'
 
 const Products = props => {
   const [showForm, setShowForm] = useState(false)
-
-  function handleClickJsReport() {
-    axios
-      .post('/api/report', {
-        template: { name: '/test/test' },
-        recipe: 'chrome-pdf'
-      })
-      .then(data => {
-        debugger
-        console.log(data)
-      })
-      .catch(error => {
-        debugger
-        console.log(error)
-      })
-  }
 
   return (
     <div className='container'>
@@ -31,7 +15,7 @@ const Products = props => {
             <button className='btn' onClick={() => setShowForm(!showForm)}>
               {showForm ? 'Table' : 'Add +'}
             </button>
-            <button onClick={handleClickJsReport}>JS Report</button>
+            <button onClick={() => props.getReport({ name: '/test/test' })}>JS Report</button>
           </li>
         </ul>
       </div>
@@ -42,6 +26,6 @@ const Products = props => {
 
 const mapStateToProps = state => ({})
 
-const mapDispatchToProps = {}
+const mapDispatchToProps = { getReport }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Products)
