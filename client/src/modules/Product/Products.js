@@ -9,7 +9,10 @@ const Products = props => {
 
   function handleClickJsReport() {
     axios
-      .post('/jsreport', {})
+      .post('/api/report', {
+        template: { name: '/test/test' },
+        recipe: 'chrome-pdf'
+      })
       .then(data => {
         debugger
         console.log(data)
