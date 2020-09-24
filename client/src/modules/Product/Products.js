@@ -15,7 +15,11 @@ const Products = props => {
             <button className='btn' onClick={() => setShowForm(!showForm)}>
               {showForm ? 'Table' : 'Add +'}
             </button>
-            <button onClick={() => props.getReport({ name: '/test/test' })}>JS Report</button>
+          </li>
+          <li className='list-inline-item'>
+            <button className='btn' onClick={() => props.getReport({ name: '/test/test' })}>
+              Report PDF
+            </button>
           </li>
         </ul>
       </div>
