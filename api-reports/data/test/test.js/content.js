@@ -1,3 +1,4 @@
+// hello
 const axios = require('axios')
 const nodemailer = require('nodemailer')
 
@@ -15,8 +16,8 @@ async function afterRender(req, res) {
     port: 587,
     auth: {
       user: 'probono@softtek.com',
-      pass: 'BPsoft#1',
-    },
+      pass: ''
+    }
   })
 
   await transporter.sendMail({
@@ -29,8 +30,8 @@ async function afterRender(req, res) {
     attachments: [
       {
         filename: 'Report.pdf',
-        content: Buffer.from(res.content),
-      },
-    ],
+        content: Buffer.from(res.content)
+      }
+    ]
   })
 }

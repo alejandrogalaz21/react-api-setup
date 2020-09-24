@@ -85,18 +85,22 @@ services:
     ports:
       - 8183:80
 
-
-  # jsreport:
-  #   container_name: jsreport
-  #   build:
-  #     dockerfile: Dockerfile
-  #     context: ./api-reports
-  #   ports:
-  #     - 5488:5488
-  #   volumes:
-  #     - '/app/node_modules'
-  #     - './api-reports:/app'
-  #   restart: always
+  jsreport:
+    container_name: jsreport
+    build:
+      dockerfile: Dockerfile
+      context: ./api-reports
+    ports:
+      - 5488:5488
+    volumes:
+      - '/app/node_modules'
+      - './api-reports:/app'
+    restart: always
+    environment:
+      SECRET: a211221684
+      USERNAME: ghost
+      PASSWORD: ghost
+      PORT: 5488
 
 volumes:
   mongo:
