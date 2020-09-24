@@ -1,16 +1,21 @@
 const jsreport = require('jsreport')({
   httpPort: process.env.PORT,
   extensions: {
+    'chrome-pdf': {
+      launchOptions: {
+        args: ['--no-sandbox']
+      }
+    },
     authentication: {
       cookieSession: {
-        secret: process.env.SECRET,
+        secret: process.env.SECRET
       },
       admin: {
         username: process.env.USERNAME,
-        password: process.env.PASSWORD,
-      },
-    },
-  },
+        password: process.env.PASSWORD
+      }
+    }
+  }
 })
 
 if (process.env.JSREPORT_CLI) {
@@ -22,7 +27,7 @@ if (process.env.JSREPORT_CLI) {
     .then(() => {
       // running
     })
-    .catch((e) => {
+    .catch(e => {
       // error during startup
       console.error(e.stack)
       process.exit(1)
