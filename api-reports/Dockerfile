@@ -1,21 +1,24 @@
-FROM jsreport/jsreport:2.10.0-full
+FROM node:10.16.1-stretch
 
-WORKDIR '/app'
+# Install chrome dependencies for jsReport
+RUN apt-get update --fix-missing
+RUN wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add - \
+  && sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list' \
+  && apt-get update \
+  && apt-get install -y google-chrome-unstable fonts-ipafont-gothic fonts-wqy-zenhei fonts-thai-tlwg fonts-kacst ttf-freefont \
+  --no-install-recommends \
+  && apt-get install -y libxtst6 libxss1 \
+  && rm -rf /var/lib/apt/lists/*
 
-# Copy only package.json and yarn.lock for cache
-COPY package*.json ./
-# Install some depenendencies
-RUN npm install
 
-# Copies everything over to Docker environment
+WORKDIR /app
+
+COPY package.json yarn.lock ./
+
+RUN yarn install
+
 COPY . .
 
-# Uses port which is used by the actual application
 EXPOSE 5488
 
-# we want to preserve the chrome version of 2.7.2 and just update the jsreport
-RUN npm install jsreport@2.10.0 && npm cache clean -f
-
-COPY --chown=jsreport:jsreport run.sh /app/run.sh
-
-CMD ["bash", "/app/run.sh"]
+CMD ["yarn", "start"]

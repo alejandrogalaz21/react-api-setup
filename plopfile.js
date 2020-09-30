@@ -38,6 +38,13 @@ const config = plop => {
         pattern: `/* PLOP_INJECT_EXPORT */`,
         template: `\t{{camelCase name}}s,`
       },
+      // jsreport
+      // {
+      //   type: 'add',
+      //   path: 'api-reports/db/models/{{camelCase name}}s/{{camelCase name}}.js',
+      //   templateFile: 'plop/plop-templates/model.hbs',
+      //   skipIfExists: true
+      // },
 
       // Add Redux
       {
