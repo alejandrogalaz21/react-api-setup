@@ -57,6 +57,7 @@ export function* productUpdate({ payload }) {
     yield call(axios.put, `/api/products/${payload.id}`, payload)
     yield put(productUpdateSuccess(payload))
     yield alert('Registro actualizado')
+    yield put(push('/products'))
   } catch (error) {
     console.log(error)
     yield put(productUpdateFailure('Fail products update request'))
