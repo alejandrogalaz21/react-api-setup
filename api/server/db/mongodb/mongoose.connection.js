@@ -1,5 +1,5 @@
 import mongoose from 'mongoose'
-import { red, green } from './../../helpers/chalk.helper'
+import { red, green } from '../../../helpers/chalk.helper'
 
 export const mongooseConnection = MONGO_DB =>
   mongoose.connect(

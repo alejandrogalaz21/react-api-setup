@@ -1,6 +1,4 @@
 /* PLOP_INJECT_IMPORT */
-import { Article, Articles, ArticleUpdate } from './../modules/Article'
-import { Product, Products, ProductUpdate } from './../modules/Product'
 import Home from './../components/Home'
 import About from './../components/About'
 import Login from './../components/Login/Login'
@@ -10,41 +8,10 @@ import FormExample from './../components/FormExample'
 
 export const routes = [
   /* PLOP_INJECT_EXPORT */
-
-	{ path: '/articles', component: Articles },
-        
-	{ path: '/articles/:id', component: Article },
-        
-	{ path: '/articles/update/:id', component: ArticleUpdate },
-
-  { path: '/products', component: Products },
-
-  { path: '/products/:id', component: Product },
-
-  { path: '/products/update/:id', component: ProductUpdate },
-
-  {
-    path: '/',
-    component: Login
-  },
-  {
-    path: '/dashboard',
-    component: Dashboard
-  },
-  {
-    path: '/home',
-    component: Home
-  },
-  {
-    path: '/about',
-    component: About
-  },
-  {
-    path: '/users',
-    component: Users
-  },
-  {
-    path: '/form',
-    component: FormExample
-  }
+  { path: '/', component: Login },
+  { path: '/dashboard', component: Dashboard },
+  { path: '/home', component: Home },
+  { path: '/about', component: About },
+  { path: '/users', component: Users },
+  { path: '/form', component: FormExample }
 ]

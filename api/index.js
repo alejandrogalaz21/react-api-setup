@@ -15,7 +15,7 @@ import { errorCentralHandler } from './server/middleware/errorHandler.middleware
 
 import { PORT, MONGO_DB } from './keys'
 import { apiRoutes } from './app/routes'
-import { mongooseConnection } from './server/db/mongoose.connection'
+import { mongooseConnection } from './server/db/mongodb/mongoose.connection'
 
 // Create express instance's
 const app = express()
@@ -46,8 +46,7 @@ app.use(errorCentralHandler)
 api.listen(PORT, () => {
   //Data Sources Instances
   mongooseConnection(MONGO_DB)
-  console.log(chalk.green('server started :'))
-  console.log(chalk.blue(`http://localhost:${PORT}`))
+  console.log(chalk.green('Server started:'))
   console.log(chalk.yellow(`http://localhost:${PORT}/api`))
-  console.log(chalk.yellow(`Data Base URL ${MONGO_DB}`))
+  console.log(chalk.yellow(`MongoDB URI connection: ${MONGO_DB}`))
 })

@@ -27,7 +27,7 @@ export function usersController(Collection) {
       const hashed = await bcrypt.hash(password, salt)
       const result = await Collection.create({ ...newEntry, password: hashed })
 
-      const hostname = ENV === 'development' ? 'localhost:5001' : host
+      const hostname = ENV === 'development' ? 'localhost:3005' : host
       const url = `http://${hostname}/login`
 
       const mailer = await generateMailer()
