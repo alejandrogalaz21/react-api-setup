@@ -36,6 +36,10 @@ app.use(cors)
 app.use(files)
 // set app route's
 app.use('/api', apiRoutes)
+
+app.get('/api', (req, res) => {
+  res.json({ message: 'hello world' })
+})
 // Error Handler
 app.use(errorCentralHandler)
 

@@ -1,0 +1,31 @@
+{
+    "shortid": "IPO1pMBQgD",
+    "name": "test",
+    "recipe": "chrome-pdf",
+    "engine": "handlebars",
+    "chrome": {
+        "printBackground": true,
+        "scale": 1,
+        "width": "",
+        "height": "",
+        "marginTop": "",
+        "marginRight": "",
+        "marginBottom": "",
+        "marginLeft": ""
+    },
+    "creationDate": {
+        "$$date": 1600493012504
+    },
+    "modificationDate": {
+        "$$date": 1600709020527
+    },
+    "inheritedReadPermissions": [],
+    "inheritedEditPermissions": [],
+    "_id": "2YWsyt8B5PEhGhvO",
+    "$entitySet": "templates",
+    "scripts": [
+        {
+            "shortid": "DdenyhkWzM"
+        }
+    ]
+}

@@ -1,0 +1,32 @@
+{
+  "httpPort": 5488,
+  "allowLocalFilesAccess": true,
+  "store": {
+    "provider": "fs"
+  },
+  "blobStorage": {
+    "provider": "fs"
+  },
+  "reportTimeout": 60000,
+  "extensions": {
+    "sample-template": {
+      "createSamples": true
+    },
+    "fs-store": {
+      "syncModifications": false
+    },
+    "phantom-pdf": {
+      "numberOfWorkers": 1,
+      "timeout": 180000,
+      "allowLocalFilesAccess": false,
+      "defaultPhantomjsVersion": "1.9.8"
+    },
+    "scheduling": {
+      "interval": 5000,
+      "maxParallelJobs": 5,
+      "misfireThreshold": "300000",
+      "cleanScheduleHistoryInterval": 60000,
+      "maxHistoryPerSchedule": 10
+    }
+  }
+}
